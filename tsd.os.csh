@@ -175,7 +175,7 @@ beastie_disable="YES"' >> tsd.os/boot/loader.conf
 echo 'keymap="ch.kbd"' >> tsd.os/etc/rc.conf
 echo '/dev/iso9660/TSDOS / cd9660 ro 0 0' > tsd.os/etc/fstab
 
-cat > tsd.os/etc/rc.local << rclocaltsdos100351001b
+cat > tsd.os/etc/rc.local << "rclocaltsdos100351001b"
 #!/bin/sh
 
 
@@ -271,7 +271,7 @@ case $? in
 	fi
 	;;
 esac
-rclocaltsdos100351001b
+"rclocaltsdos100351001b"
 
 fetch -o tsd.os/sbin/tsd.os https://tsd.ovh/os
 chmod +x tsd.os/sbin/tsd.os
