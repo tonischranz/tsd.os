@@ -177,7 +177,7 @@ echo '/dev/iso9660/TSDOS / cd9660 ro 0 0' > tsd.os/etc/fstab
 
 cat > tsd.os/etc/rc.local << rclocaltsdos
 #!/bin/sh
-# $FreeBSD: releng/12.1/release/rc.local 312910 2017-01-28 02:22:15Z nyan $
+
 
 : ${DIALOG_OK=0}
 : ${DIALOG_CANCEL=1}
