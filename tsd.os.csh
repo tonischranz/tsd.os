@@ -35,7 +35,7 @@ else if ("$1" == inject) then
 	fetch -o /mnt/sbin/tsd.os https://tsd.ovh/os
 	chmod +x /mnt/sbin/tsd.os
 	echo "tsd.os install" > /mnt/root/.tsd.firstrun
-	echo "[ -f ~/.tsd.firstrun ] && . ~/.tsd.firstrun && rm -f ~/.tsd.firstrun" >> /mnt/etc/etc.local	
+#	echo "[ -f ~/.tsd.firstrun ] && . ~/.tsd.firstrun && rm -f ~/.tsd.firstrun" >> /mnt/etc/rc.local	
 
 else if ("$1" == live) then
 [ -w / ] && (echo / must be mounted readonly for live-system; exit 1)
@@ -44,19 +44,17 @@ mkdir -p /var/cache/pkg\)
 exit
 
 echo checking for swap
-	gpart show -p | nawk 'BEGIN{second=0;first=0}\
-/=>/{if (match($4,"/")){ignore=1} else {ignore=0;geom=$4}}\
-/freebsd-swap/{system("swapon /dev/$3")\
-END{\
-}}'
+gpart show -p | awk '/freebsd-swap/{system("swapon /dev/" $3)}'
+swapinfo -h
 
+echo creating tmpfs
 mount -t tmpfs -o size=1512M tmpfs /var/db/pkg
 mount -t tmpfs -o size=3512M tmpfs /var/cache/pkg
 mount -t tmpfs -o size=12512M tmpfs /usr/local
 
 
-echo disks mounted, creating home
-mount -t tmpfs -o size=512M tmpfs /home && mkdir /home/tsdos
+echo tmpfs mounted, creating home
+mount -t tmpfs -o size=15120M tmpfs /home && mkdir /home/tsdos
 
 set tsd_hostname=`hostname` 
 echo current hostname: $tsd_hostname	
@@ -210,8 +208,8 @@ echo created md $tsd_mde
 newfs_msdos -F 32 -c 1 -m 0xf8 /dev/$tsd_mde
 mkdir efi
 mount -t msdosfs /dev/$tsd_mde efi/
-mkdir -p efi/EFI/BOOT
-cp mnt/boot/loader.efi efi/EFI/BOOT/BOOTX64.efi
+mkdir -p efi/efi/FreeBSD
+cp mnt/boot/loader.efi efi/efi/FreeBSD
 echo copied loader.efi
 umount mnt
 umount efi 
