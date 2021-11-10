@@ -4,7 +4,7 @@ hash tsd.os || (hash fetch && mkdir -p ~/bin && fetch -o ~/bin/tsd.os https://ts
 set fbsd_root=https://download.freebsd.org/ftp/releases
 set fbsd_arch=amd64
 set fbsd_fam=amd64
-set fbsd_rel=12.1
+set fbsd_rel=13.0
 
 echo "   _____________________________________________"
 echo " /----------------------------------------------"
