@@ -46,13 +46,14 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 && kldstat | ! grep i915kms\.ko\
 && ([ -w /boot/modules ] || mount -t tmpfs -o size=100M tmpfs /boot/modules)\
 && pkg install -y drm-kmod\
-&& kldload /boot/modules/i915kms.ko
+&& kldload i915kms
 
 [ -d /usr/local/share ] || mkdir /usr/local/share
 [ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || fetch -o - https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
 
-[ -w / ] || pkg install -AIy tpm-emulator
-[ -w / ] || pkg install -y xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu font-awesome webfonts zh-CNS11643-font && (. ~/.x &)
+## ToDo:
+#[ -w / ] || pkg install -AIy tpm-emulator
+#[ -w / ] || pkg install -y xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu font-awesome webfonts zh-CNS11643-font && (. ~/.x &)
 [ -w / ] || exit 0
 
 grep UTF-8 /etc/profile \

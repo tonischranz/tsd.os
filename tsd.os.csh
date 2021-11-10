@@ -40,8 +40,7 @@ else if ("$1" == inject) then
 else if ("$1" == live) then
 [ -w / ] && (echo / must be mounted readonly for live-system; exit 1)
 
-mkdir -p /var/cache/pkg\)
-exit
+mkdir -p /var/cache/pkg
 
 echo checking for swap
 gpart show -p | awk '/freebsd-swap/{system("swapon /dev/" $3)}'
