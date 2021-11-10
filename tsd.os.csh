@@ -216,6 +216,6 @@ mdconfig -d -u $tsd_md
 mdconfig -d -u $tsd_mde
 
 echo building iso and flashing it to device
-sudo makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && sudo dd if=tsd.os.iso of=/dev/$1 bs=4k status=progress
+sudo makefs -t cd9660 -o generic-bootimage -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && sudo dd if=tsd.os.iso of=/dev/$1 bs=4k status=progress
 echo finished
 endif
