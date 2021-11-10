@@ -62,14 +62,11 @@ grep UTF-8 /etc/profile \
 MM_CHARSET="UTF-8"' >> /etc/profile)
 
 pciconf -lv | grep -B3 display | grep 'UHD Graphics 630' \
-&& ! grep kld_list /etc/rc.conf \
-&& echo installing/loading intel driver in rc.conf \
-&& pkg install -y drm-kmod \
 && echo 'kld_list="/boot/modules/i915kms.ko"' >> /etc/rc.conf
 
-grep loader_logo /boot/loader.conf \
-|| echo Setting beastie logo \
-&& echo 'loader_logo="beastie"' >> /boot/loader.conf
+#grep loader_logo /boot/loader.conf \
+#|| echo Setting beastie logo \
+#&& echo 'loader_logo="beastie"' >> /boot/loader.conf
 
 echo sudoers
 [ -f /usr/local/etc/sudoers.d/wheel-nopw ] \
