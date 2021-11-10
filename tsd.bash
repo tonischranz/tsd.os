@@ -118,6 +118,7 @@ fi
 source /usr/local/share/bash-completion/bash_completion.sh
 
 [ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
+[ -f /usr/local/share/git-core/contrib/completion/git-completion.bash ] && . /usr/local/share/git-core/contrib/completion/git-completion.bash
 [ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
 
 #################################################
@@ -412,47 +413,44 @@ set $mod Mod4
 font pango:DejaVu Sans Mono 9
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #000000 #000000 #285577 #000000   #000000
-client.focused_inactive #000000 #000000 #888888 #000000   #000000
+client.focused          #000000 #000000 #287755 #000000   #000000
+client.focused_inactive #000000 #000000 #143625 #000000   #000000
 client.unfocused        #000000 #222222 #888888 #000000   #000000
 client.urgent           #000000 #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #050505
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
 workspace_layout tabbed
 
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt -tr -sh 20
+bindsym $mod+End exec firefox
+bindsym $mod+Shift+End exec hash chrome && chrome || (hash chromium && chromium) || firefox
+bindsym $mod+Shift+Home exec xterm -e bash -c htop
+bindsym $mod+Home exec urxvt -tr -sh 20 -e bash -c "mc ~ /"
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop-20
+bindsym $mod+e exec --no-startup-id i3-dmenu-desktop-20 --cmd-prefix="DISPLAY=:20"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# move focused windowexec urxvtght
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -479,16 +477,16 @@ bindsym $mod+Shift+space floating toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 1 \U1f39c East
-set $ws2 2 \u2692 South
-set $ws3 3 \u262e West
-set $ws4 4 \U1f56e North
-set $ws5 5 \U1f57f SE
-set $ws6 6 \U1f5e2 SW
-set $ws7 7 \U1f56d NE
-set $ws8 8 \U1f585 NW
-set $ws9 9 \U1f5ea SSW
-set $ws10 10 \u2179 NNO
+set $ws1 01 \u2692 eis
+set $ws2 02 \u2692 zwöi
+set $ws3 03 \u2692 drü
+set $ws4 04 \u2692 vier
+set $ws5 05 \u2692 füf
+set $ws6 06 \u2692 säx
+set $ws7 07 \u2692 sibä
+set $ws8 08 \u2692 acht
+set $ws9 09 \u2692 nün
+set $ws10 10 \u2692 zä
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -519,20 +517,11 @@ bindsym $mod+Shift+J reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+P restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+greater exec "i3-nagbar -t warning -m \'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.\' -B \'Yes, exit i3\' \'i3-msg exit\'"
+bindsym $mod+Shift+greater exec "i3-nagbar -t warning -m 'exit?' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym t resize grow height 10 px or 10 ppt
-        bindsym n resize shrink height 10 px or 10 ppt
-        bindsym s resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -552,14 +541,22 @@ bindsym $mod+p mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        colors 
+	{
+          background #000000
+          statusline #FFFFFF
+          separator  #666666
+  
+          focused_workspace  #2D9938 #0C5B2C #FFFFFF
+          active_workspace   #333333 #222222 #FFFFFF
+          inactive_workspace #333333 #222222 #888888
+          urgent_workspace   #2F343A #900000 #FFFFFF
+          binding_mode       #2F343A #900000 #FFFFFF
+        }
 }
 
 
 exec --no-startup-id . ~/.fehbg
-#exec --no-startup-id pcmanfm --desktop
-exec --no-startup-id urxvt -e htop
-exec --no-startup-id urxvt -e bash
-exec --no-startup-id urxvt -e mc
 ' > ~/.config/i3/config
 
 [ -f /git-bash.exe ] || [ -f ~/.i3status.conf ] || echo $'
@@ -685,14 +682,6 @@ function __restore_all {
 	[ -f ~/.symbols.orig ] && ! [ -f ~/.symbols ] && mv ~/.symbols.orig ~/.symbols
 }
 
-function git_clone_mxm () 
-{ 
-	cd $REPO_HOME; 
-	git clone https://bitbucket.org/maxomedia/$* 2>~/.mxm_clone; 
-	cd $(cat ~/.mxm_clone | grep Cloning | cut -d\' -f 2); 
-	rm ~/.mxm_clone; 
-	git checkout develop;
-}
 
 function git_clone_ts () 
 { 
@@ -703,16 +692,6 @@ function git_clone_ts ()
 	git checkout develop;
 }
 
-
-function git_work_mxm () 
-{ 
-	cd $REPO_HOME; 
-	#find repo
-	#clone if not present
-	#cd there
-	
-	#git checkout -b jira/$1;
-}
 
 #################################################
 # tools
