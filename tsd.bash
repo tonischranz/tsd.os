@@ -443,8 +443,9 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop-20
-bindsym $mod+e exec --no-startup-id i3-dmenu-desktop-20 --cmd-prefix="DISPLAY=:20"
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop-20
+#bindsym $mod+e exec --no-startup-id i3-dmenu-desktop-20 --cmd-prefix="DISPLAY=:20"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
