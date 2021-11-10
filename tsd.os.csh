@@ -40,111 +40,36 @@ else if ("$1" == inject) then
 else if ("$1" == live) then
 [ -w / ] && (echo / must be mounted readonly for live-system; exit 1)
 
-echo cleaning up old partitions
-gpart show -l | nawk '/=>/{if (match($4,"/")){ignore=1} else {ignore=0;geom=$4}}\
-/tsd\.swap/{if (! ignore) { system("gpart delete -i " $3 " " geom) } }\
-/tsd\.local/{if (! ignore) { system("gpart delete -i " $3 " " geom) } }\
-/tsd\.db/{if (! ignore) { system("gpart delete -i " $3 " " geom) } }\
-/tsd\.cache/{if (! ignore) { system("gpart delete -i " $3 " " geom) } }'
-
 mkdir -p /var/cache/pkg\)
 exit
 
-echo checking for 20G
-	gpart show | nawk 'BEGIN{second=0;first=0}\
+echo checking for swap
+	gpart show -p | nawk 'BEGIN{second=0;first=0}\
 /=>/{if (match($4,"/")){ignore=1} else {ignore=0;geom=$4}}\
-/- free -/{if (! ignore && $2 > 41943040 && $2 > first)\
-{if (first > second) {second_geom=first_geom;second=first};\
-first=$2;first_geom=geom}\
-else {if (! ignore && $2 > 41943040 && $2 > second) {second=$2;second_geom=geom}}}\
+/freebsd-swap/{system("swapon /dev/$3")\
 END{\
-if (first){\
-if (second)\
-{system("tsd_db=`gpart add -t freebsd-ufs  -s 512M -l tsd.db "    second_geom " | cut -d \" \" -f1`;newfs -L tsd-db    /dev/$tsd_db;    mount /dev/$tsd_db    /var/db/pkg");\
- system("tsd_cache=`gpart add -t freebsd-ufs  -s 1G   -l tsd.cache " second_geom " | cut -d \" \" -f1`;newfs -L tsd-cache /dev/$tsd_cache; mount /dev/$tsd_cache /var/cache/pkg");\
- system("tsd_loc=`gpart add -t freebsd-ufs  -s 10G  -l tsd.local " second_geom " | cut -d \" \" -f1`;newfs -L tsd-local /dev/$tsd_loc;   mount /dev/$tsd_loc   /usr/local");\
- system("tsd_swap=`gpart add -t freebsd-swap -s 4G   -l tsd.swap "  second_geom " | cut -d \" \" -f1`;swapon /dev/$tsd_swap");\
-}\
-else\
-{system("tsd_db=`gpart add -t freebsd-ufs  -s 512M -l tsd.db "    first_geom " | cut -d \" \" -f1`;newfs -L tsd-db    /dev/$tsd_db;    mount /dev/$tsd_db    /var/db/pkg");\
- system("tsd_cache=`gpart add -t freebsd-ufs  -s 1G   -l tsd.cache " first_geom " | cut -d \" \" -f1`;newfs -L tsd-cache /dev/$tsd_cache; mount /dev/$tsd_cache /var/cache/pkg");\
- system("tsd_loc=`gpart add -t freebsd-ufs  -s 10G  -l tsd.local " first_geom " | cut -d \" \" -f1`;newfs -L tsd-local /dev/$tsd_loc;   mount /dev/$tsd_loc   /usr/local");\
- system("tsd_swap=`gpart add -t freebsd-swap -s 4G   -l tsd.swap "  first_geom " | cut -d \" \" -f1`;swapon /dev/$tsd_swap");\
-}}}'
+}}'
 
-echo 10G
-mount | grep /usr/local || gpart show | nawk 'BEGIN{second=0;first=0}\
-/=>/{if (match($4,"/")){ignore=1} else {ignore=0;geom=$4}}\
-/- free -/{if (! ignore && $2 > 20971520 && $2 > first)\
-{if (first > second) {second_geom=first_geom;second=first};\
-first=$2;first_geom=geom}\
-else {if (! ignore && $2 > 20971520 && $2 > second) {second=$2;second_geom=geom}}}\
-END{\
-if (first){\
-if (second)\
-{system("tsd_db=`   gpart add -t freebsd-ufs  -s 512M -l tsd.db "    second_geom " | cut -d \" \" -f1`;newfs -L tsd-db    /dev/$tsd_db;    mount /dev/$tsd_db    /var/db/pkg");\
- system("tsd_cache=`gpart add -t freebsd-ufs  -s 1G   -l tsd.cache " second_geom " | cut -d \" \" -f1`;newfs -L tsd-cache /dev/$tsd_cache; mount /dev/$tsd_cache /var/cache/pkg");\
- system("tsd_loc=`  gpart add -t freebsd-ufs  -s 5G   -l tsd.local " second_geom " | cut -d \" \" -f1`;newfs -L tsd-local /dev/$tsd_loc;   mount /dev/$tsd_loc   /usr/local");\
- system("tsd_swap=` gpart add -t freebsd-swap -s 3G   -l tsd.swap "  second_geom " | cut -d \" \" -f1`;swapon /dev/$tsd_swap");\
-}\
-else\
-{system("tsd_db=`   gpart add -t freebsd-ufs  -s 512M -l tsd.db "    first_geom " | cut -d \" \" -f1`;newfs -L tsd-db    /dev/$tsd_db;    mount /dev/$tsd_db    /var/db/pkg");\
- system("tsd_cache=`gpart add -t freebsd-ufs  -s 1G   -l tsd.cache " first_geom " | cut -d \" \" -f1`;newfs -L tsd-cache /dev/$tsd_cache; mount /dev/$tsd_cache /var/cache/pkg");\
- system("tsd_loc=`  gpart add -t freebsd-ufs  -s 5G   -l tsd.local " first_geom " | cut -d \" \" -f1`;newfs -L tsd-local /dev/$tsd_loc;   mount /dev/$tsd_loc   /usr/local");\
- system("tsd_swap=` gpart add -t freebsd-swap -s 3G   -l tsd.swap "  first_geom " | cut -d \" \" -f1`;swapon /dev/$tsd_swap");\
-}}}'
+mount -t tmpfs -o size=1512M tmpfs /var/db/pkg
+mount -t tmpfs -o size=3512M tmpfs /var/cache/pkg
+mount -t tmpfs -o size=12512M tmpfs /usr/local
 
-echo 6G
-mount | grep /usr/local || gpart show | nawk 'BEGIN{second=0;first=0}\
-/=>/{if (match($4,"/")){ignore=1} else {ignore=0;geom=$4}}\
-/- free -/{if (! ignore && $2 > 12582912 && $2 > first)\
-{if (first > second) {second_geom=first_geom;second=first};\
-first=$2;first_geom=geom}\
-else {if (! ignore && $2 > 12582912 && $2 > second) {second=$2;second_geom=geom}}}\
-END{\
-if (first){\
-if (second)\
-{system("tsd_db=`   gpart add -t freebsd-ufs  -s 512M -l tsd.db "    second_geom " | cut -d \" \" -f1`;newfs -L tsd-db    /dev/$tsd_db;    mount /dev/$tsd_db    /var/db/pkg");\
- system("tsd_cache=`gpart add -t freebsd-ufs  -s 1G   -l tsd.cache " second_geom " | cut -d \" \" -f1`;newfs -L tsd-cache /dev/$tsd_cache; mount /dev/$tsd_cache /var/cache/pkg");\
- system("tsd_loc=`  gpart add -t freebsd-ufs  -s 3G   -l tsd.local " second_geom " | cut -d \" \" -f1`;newfs -L tsd-local /dev/$tsd_loc;   mount /dev/$tsd_loc   /usr/local");\
- system("tsd_swap=` gpart add -t freebsd-swap -l         tsd.swap "  second_geom " | cut -d \" \" -f1`;swapon /dev/$tsd_swap");\
-}\
-else\
-{system("tsd_db=`   gpart add -t freebsd-ufs  -s 256M -l tsd.db "    first_geom " | cut -d \" \" -f1`;newfs -L tsd-db    /dev/$tsd_db;    mount /dev/$tsd_db    /var/db/pkg");\
- system("tsd_cache=`gpart add -t freebsd-ufs  -s 756M -l tsd.cache " first_geom " | cut -d \" \" -f1`;newfs -L tsd-cache /dev/$tsd_cache; mount /dev/$tsd_cache /var/cache/pkg");\
- system("tsd_loc=`  gpart add -t freebsd-ufs  -s 3G   -l tsd.local " first_geom " | cut -d \" \" -f1`;newfs -L tsd-local /dev/$tsd_loc;   mount /dev/$tsd_loc   /usr/local");\
- system("tsd_swap=` gpart add -t freebsd-swap -s 1G   -l tsd.swap "  first_geom " | cut -d \" \" -f1`;swapon /dev/$tsd_swap");\
-}}}'
 
 echo disks mounted, creating home
 mount -t tmpfs -o size=512M tmpfs /home && mkdir /home/tsdos
-echo searching for existing home
+
 set tsd_hostname=`hostname` 
 echo current hostname: $tsd_hostname	
-set tsd_home=`gpart show -lp | grep tsd\.$tsd_hostname | awk '{print $3}' | head -n1`
-[ -n "$tsd_home" ] && echo home found on $tsd_home && mount /dev/$tsd_home /home/tsdos
-[ -n "$tsd_home" ] || gpart show | nawk 'BEGIN{second=0;first=0}\
-/=>/{if (match($4,"/")){ignore=1} else {ignore=0;geom=$4}}\
-/- free -/{if (! ignore && $2 > first)\
-{if (first > second) {second_geom=first_geom;second=first};\
-first=$2;first_geom=geom}\
-else {if (! ignore && $2 > second)\
-{second=$2;second_geom=geom}}}\
-END{\
-if(first)\
-{system("tsd_hostname=`hostname`;\
-tsd_home=`gpart add -t freebsd-ufs -l tsd.$tsd_hostname " first_geom " | cut -d \" \" -f1`;\
-newfs -L tsd-home /dev/$tsd_home;\
-mount /dev/$tsd_home /home/tsdos");}}'
+mkdir /home/tsdos/$tsd_hostname
 
-cp /etc/ssl/openssl.cnf /home/tsdos
+cp /etc/ssl/openssl.cnf /home
 mount -t tmpfs -o size=20M tmpfs /etc/ssl
-cp /home/tsdos/openssl.cnf /etc/ssl
-rm /home/tsdos/openssl.cnf
+cp /home/openssl.cnf /etc/ssl
+rm /home/openssl.cnf
 
 tsd.os install
 
-HOME=/home/tsdos; export HOME; cd
+HOME=/home/tsdos/$tsd_hostname; export HOME; cd
 /usr/local/bin/bash
 
 poweroff
