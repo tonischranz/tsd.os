@@ -207,8 +207,8 @@ echo created md $tsd_mde
 newfs_msdos -F 32 -c 1 -m 0xf8 /dev/$tsd_mde
 mkdir efi
 mount -t msdosfs /dev/$tsd_mde efi/
-mkdir -p efi/efi/FreeBSD
-cp mnt/boot/loader.efi efi/efi/FreeBSD
+mkdir -p efi/EFI/BOOT
+cp mnt/boot/loader.efi efi/EFI/BOOT/BOOTX64.efi
 echo copied loader.efi
 umount mnt
 umount efi 
@@ -216,6 +216,6 @@ mdconfig -d -u $tsd_md
 mdconfig -d -u $tsd_mde
 
 echo building iso and flashing it to device
-sudo makefs -t cd9660 -o bootimage='efi;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && sudo dd if=tsd.os.iso of=/dev/$1 bs=4k status=progress
+sudo makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && sudo dd if=tsd.os.iso of=/dev/$1 bs=4k status=progress
 echo finished
 endif
