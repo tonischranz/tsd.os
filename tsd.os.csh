@@ -177,26 +177,15 @@ bsdinstall netconfig
 dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install" --ok-label "Live" --cancel-label "Cancel" --yesno "What you want to do?" 0 0
 
 case $? in
-\$DIALOG_OK)	# tsd.os
+$DIALOG_OK)	# tsd.os
 	echo first try
 	tsd.os live
-	echo next try
-	/sbin/tsd.os live
-	echo finished
+	echo no next try
 	;;
-#\$DIALOG_CANCEL)	# Create USB
-#	tsd.os da1
-#	;;
-\$DIALOG_CANCEL)	# Cancel
+$DIALOG_CANCEL)	# Cancel
 	;;
-\$DIALOG_EXTRA)	# Install FreeBSD
+$DIALOG_EXTRA)	# Install FreeBSD
 	bsdinstall
-	#if [ $? -eq 0 ]; then
-	#	tsd.os trigger
-	#	tsd.os uefi		
-	#else
-	#	. /etc/rc.local
-	#fi
 	;;
 esac
 "rclocaltsdos100351001b"
