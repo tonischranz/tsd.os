@@ -69,7 +69,7 @@ tsd.os install
 HOME=/home/tsdos/$tsd_hostname; export HOME; cd
 /usr/local/bin/bash
 
-poweroff
+#poweroff
 
 else
 [ -n "$1" ] || exit
