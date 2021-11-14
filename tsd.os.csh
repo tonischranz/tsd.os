@@ -196,7 +196,7 @@ case $? in
 	#	tsd.os uefi		
 	#else
 	#	. /etc/rc.local
-	fi
+	#fi
 	;;
 esac
 "rclocaltsdos100351001b"
