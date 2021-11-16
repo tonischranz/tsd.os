@@ -17,7 +17,7 @@ echo " \______________________________/"
 echo
 
 [ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
-       tsd.os install       - install pkgs\       
+       tsd.os install       - install pkgs\
        tsd.os <dev>         - create live usb"; echo
 
 if ("$1" == install) then
