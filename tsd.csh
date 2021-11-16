@@ -46,7 +46,6 @@ PAGER=more;  	export PAGER\
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
 LANG=\"en_US.UTF-8\"; export LANG\
 MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
-
 if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
 hash startx && (. ~/.x &)" > ~/.profile
 
