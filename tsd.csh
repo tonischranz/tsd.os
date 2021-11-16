@@ -16,6 +16,10 @@ set MyGroups="operator video wheel"
 
 [ `id -u` -gt 0 ] && echo this script must be run as root && exit
 
+echo make etc writable
+set etc_dir=`mktemp -d`
+mount -t unionfs $etc_dir /etc
+ 
 echo Installing/updating packages
 pkg install -y bash curl
 #[ -w / ] && pkg install -y sudo
