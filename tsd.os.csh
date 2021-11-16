@@ -65,7 +65,7 @@ mount -t tmpfs -o size=20M tmpfs /etc/ssl
 cp /root/openssl.cnf /etc/ssl
 rm /root/openssl.cnf
 
-pkg -y install curl
+pkg install -y curl
 
 tsd.os install
 bash
