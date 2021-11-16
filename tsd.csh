@@ -1,7 +1,13 @@
-echo /-----------------------------------------------
-echo \|-----------------------------------------------
-echo \|\| FreeBSD pkg setup by tsd.               ------
-echo \\\\____________________________________________--
+echo "                                                                  ////////////////"
+echo "                                                         ///////////////////////////"
+echo "                                                  ///////////////////////"
+echo " _________________________________________///////////////////"
+echo "/--------------------------------- ____ ///o////////"
+echo "|---------------------------------/      //////"
+echo "|   pkg setup by tsd.            /"
+echo " \______________________________/"
+echo
+
 
 set MyUser=`hostname | cut -d "-" -f1`
 
@@ -11,35 +17,38 @@ set MyGroups="operator video wheel"
 [ `id -u` -gt 0 ] && echo this script must be run as root && exit
 
 echo Installing/updating packages
-pkg install -y pkg bash vim-console mc-nox11 curl lynx htop
-[ -w / ] && pkg install -y sudo
-([ -w / ] && grep $MyUser /etc/passwd)\
-|| echo Setting up user account \
-&& pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
+pkg install -y bash curl
+#[ -w / ] && pkg install -y sudo
+#([ -w / ] && grep $MyUser /etc/passwd)\
+#|| echo Setting up user account \
+#&& 
+#pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
 
-[ -w / ] || set MyUser=tsdos
+#[ -w / ] || set MyUser=tsdos
 
-mkdir -p /home/$MyUser
+#mkdir -p /home/$MyUser
 
-echo x
-[ -f /home/$MyUser/.x ] \
-|| echo writing .x \
-&& echo '[ "$SHLVL" == 1 ] && hash startx && startx\
-[ "$SHLVL" == 1 ] && hash startx && poweroff' > "/home/$MyUser/.x"
+#echo x
+#[ -f /home/$MyUser/.x ] \
+#|| echo writing .x \
+#&& echo '[ "$SHLVL" == 1 ] && hash startx && startx\
+#[ "$SHLVL" == 1 ] && hash startx && poweroff' > "/home/$MyUser/.x"
 
 echo profile
-[ -f /home/$MyUser/.profile ] || echo "HOME=/home/$MyUser; export HOME\
+#[ -f /home/$MyUser/.profile ] || echo "HOME=/home/$MyUser; export HOME\
+[ -f ~/.profile ] || echo "
 EDITOR=vim;   	export EDITOR\
 PAGER=more;  	export PAGER\
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/.php:~/.dotnet; export PATH\
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
 LANG=\"en_US.UTF-8\"; export LANG\
 MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
 
 if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
-hash startx && (. ~/.x &)" > /home/$MyUser/.profile
+hash startx && (. ~/.x &)" > ~/.profile
 
 echo bashrc
-[ -f /home/$MyUser/.bashrc ] || fetch -o - https://tsd.ovh/b | /usr/local/bin/bash --noprofile
+[ -f ~/.bashrc ] || fetch -o - https://tsd.ovh/b | bash --noprofile
+#[ -f /home/$MyUser/.bashrc ] || fetch -o - https://tsd.ovh/b | /usr/local/bin/bash --noprofile
 
 echo checking for video driver
 pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\

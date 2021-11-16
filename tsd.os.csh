@@ -6,35 +6,35 @@ set fbsd_arch=amd64
 set fbsd_fam=amd64
 set fbsd_rel=13.0
 
-echo "   _____________________________________________"
-echo " /----------------------------------------------"
-echo "|-----------------------------------------------"
-echo "|\   tsd.os"
-echo " \\__________________________________________---"
+echo "                                                                  ////////////////"
+echo "                                                         ///////////////////////////"
+echo "                                                  ///////////////////////"
+echo " _________________________________________///////////////////"
+echo "/--------------------------------- ____ ///o////////"
+echo "|---------------------------------/      //////"
+echo "|   tsd.os                       /"
+echo " \______________________________/"
 echo
 
 [ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
-       tsd.os install       - install pkgs\
-       tsd.os inject        - install on boot\
-       tsd.os <dev>         - create live usb\
-       tsd.os uefi [<dev>]  - make bootable"; echo
+       tsd.os install       - install pkgs\       
+       tsd.os <dev>         - create live usb"; echo
 
 if ("$1" == install) then
-	pkg install -y pkg curl && \
-	/usr/local/bin/curl https://tsd.ovh/c | csh
+	fetch -o - https://tsd.ovh/c | csh
 
-else if ("$1" == uefi) then
-	set tsd_dir=`mktemp -d`; cd $tsd_dir
-	set tsd_efi=`gpart show -lp | grep efi | awk '{print $3}' | head -n1`
-	newfs_msdos -F 32 -c 1 -m 0xf8 /dev/$tsd_efi
-	mkdir efi; mount -t msdosfs /dev/$tsd_mde efi/
-	mkdir -p efi/EFI/BOOT; cp mnt/boot/loader.efi efi/EFI/BOOT/BOOTX64.efi
-	reboot
+#else if ("$1" == uefi) then
+#	set tsd_dir=`mktemp -d`; cd $tsd_dir
+#	set tsd_efi=`gpart show -lp | grep efi | awk '{print $3}' | head -n1`
+#	newfs_msdos -F 32 -c 1 -m 0xf8 /dev/$tsd_efi
+#	mkdir efi; mount -t msdosfs /dev/$tsd_mde efi/
+#	mkdir -p efi/EFI/BOOT; cp mnt/boot/loader.efi efi/EFI/BOOT/BOOTX64.efi
+#	reboot
 
-else if ("$1" == inject) then
-	fetch -o /mnt/sbin/tsd.os https://tsd.ovh/os
-	chmod +x /mnt/sbin/tsd.os
-	echo "tsd.os install" > /mnt/root/.tsd.firstrun
+#else if ("$1" == inject) then
+#	fetch -o /mnt/sbin/tsd.os https://tsd.ovh/os
+#	chmod +x /mnt/sbin/tsd.os
+#	echo "tsd.os install" > /mnt/root/.tsd.firstrun
 #	echo "[ -f ~/.tsd.firstrun ] && . ~/.tsd.firstrun && rm -f ~/.tsd.firstrun" >> /mnt/etc/rc.local	
 
 else if ("$1" == live) then
@@ -50,24 +50,24 @@ echo creating tmpfs
 mount -t tmpfs -o size=1512M tmpfs /var/db/pkg
 mount -t tmpfs -o size=3512M tmpfs /var/cache/pkg
 mount -t tmpfs -o size=12512M tmpfs /usr/local
+mount -t tmpfs -o size=512M tmpfs /root
 
 
 echo tmpfs mounted, creating home
-mount -t tmpfs -o size=15120M tmpfs /home && mkdir /home/tsdos
+#mount -t tmpfs -o size=15120M tmpfs /home && mkdir /home/tsdos
 
 set tsd_hostname=`hostname` 
 echo current hostname: $tsd_hostname	
-mkdir /home/tsdos/$tsd_hostname
+#mkdir /home/tsdos/$tsd_hostname
 
-cp /etc/ssl/openssl.cnf /home
+cp /etc/ssl/openssl.cnf /root
 mount -t tmpfs -o size=20M tmpfs /etc/ssl
-cp /home/openssl.cnf /etc/ssl
-rm /home/openssl.cnf
+cp /root/openssl.cnf /etc/ssl
+rm /root/openssl.cnf
 
 tsd.os install
+bash
 
-HOME=/home/tsdos/$tsd_hostname; export HOME; cd
-/usr/local/bin/bash
 
 #poweroff
 
@@ -180,9 +180,9 @@ case $? in
 $DIALOG_OK)	# tsd.os
 	echo first try
 	tsd.os live
-	echo no next try
 	;;
 $DIALOG_CANCEL)	# Cancel
+	init 6
 	;;
 $DIALOG_EXTRA)	# Install FreeBSD
 	bsdinstall
