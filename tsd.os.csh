@@ -21,7 +21,7 @@ echo
        tsd.os <dev>         - create live usb"; echo
 
 if ("$1" == install) then
-	fetch -o - https://tsd.ovh/c | csh
+	curl https://tsd.ovh/c | csh
 
 #else if ("$1" == uefi) then
 #	set tsd_dir=`mktemp -d`; cd $tsd_dir
@@ -64,6 +64,8 @@ cp /etc/ssl/openssl.cnf /root
 mount -t tmpfs -o size=20M tmpfs /etc/ssl
 cp /root/openssl.cnf /etc/ssl
 rm /root/openssl.cnf
+
+pkg -y install curl
 
 tsd.os install
 bash
