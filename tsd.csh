@@ -40,7 +40,7 @@ pkg install -y bash curl
 
 echo profile
 #[ -f /home/$MyUser/.profile ] || echo "HOME=/home/$MyUser; export HOME\
-[ -f ~/.profile ] || echo "
+[ -f ~/.profile ] || echo "\
 EDITOR=vim;   	export EDITOR\
 PAGER=more;  	export PAGER\
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
