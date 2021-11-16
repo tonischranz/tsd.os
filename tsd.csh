@@ -38,20 +38,20 @@ pkg install -y bash curl
 #&& echo '[ "$SHLVL" == 1 ] && hash startx && startx\
 #[ "$SHLVL" == 1 ] && hash startx && poweroff' > "/home/$MyUser/.x"
 
-echo profile
+echo profile SKIP
 #[ -f /home/$MyUser/.profile ] || echo "HOME=/home/$MyUser; export HOME\
-[ -f ~/.profile ] || echo "
-EDITOR=vim;   	export EDITOR\
-PAGER=more;  	export PAGER\
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
-LANG=\"en_US.UTF-8\"; export LANG\
-MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
+#[ -f ~/.profile ] || echo "
+#EDITOR=vim;   	export EDITOR\
+#PAGER=more;  	export PAGER\
+#PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
+#LANG=\"en_US.UTF-8\"; export LANG\
+#MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
 
-if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
-hash startx && (. ~/.x &)" > ~/.profile
+#if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
+#hash startx && (. ~/.x &)" > ~/.profile
 
 echo bashrc
-[ -f ~/.bashrc ] || fetch -o - https://tsd.ovh/b | bash --noprofile
+[ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash --noprofile
 #[ -f /home/$MyUser/.bashrc ] || fetch -o - https://tsd.ovh/b | /usr/local/bin/bash --noprofile
 
 echo checking for video driver
@@ -62,7 +62,7 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 && kldload i915kms
 
 [ -d /usr/local/share ] || mkdir /usr/local/share
-[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || fetch -o - https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
+[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
 
 ## ToDo:
 #[ -w / ] || pkg install -AIy tpm-emulator
