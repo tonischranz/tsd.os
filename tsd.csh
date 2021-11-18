@@ -49,9 +49,9 @@ echo profile SKIP
 
 #if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
 #hash startx && (. ~/.x &)" > ~/.profile
-
+echo tilde=~
 echo bashrc
-[ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash --noprofile
+[ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash
 #[ -f /home/$MyUser/.bashrc ] || fetch -o - https://tsd.ovh/b | /usr/local/bin/bash --noprofile
 
 echo checking for video driver
