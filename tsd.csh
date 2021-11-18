@@ -50,13 +50,17 @@ echo profile SKIP
 #if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
 #hash startx && (. ~/.x &)" > ~/.profile
 echo tilde=~
+env
+echo
 echo bashrc
+echo
+
 [ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash
 #[ -f /home/$MyUser/.bashrc ] || fetch -o - https://tsd.ovh/b | /usr/local/bin/bash --noprofile
 
 echo checking for video driver
 pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
-&& kldstat | ! grep i915kms\.ko\
+#&& kldstat | ! grep i915kms\.ko\
 && ([ -w /boot/modules ] || mount -t tmpfs -o size=100M tmpfs /boot/modules)\
 && pkg install -y drm-kmod\
 && kldload i915kms
