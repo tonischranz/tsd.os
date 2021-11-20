@@ -25,8 +25,12 @@ pkg install -y bash curl sudo
 
 #[ -w / ] && pkg install -y sudo
 #([ -w / ] && grep $MyUser /etc/passwd)\
+echo making home writable
+mount -t tmpfs -o size=15120M tmpfs /home
+
 echo Setting up user account $MyUser
 pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
+[ -d /home/$MyUser ] || mkdir /home/$MyUser
 
 #echo setting up gettytab / ttys
 echo "# WB: autologin console as user $MyUser\
@@ -86,8 +90,8 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 && kldload drm
 && kldload i915kms
 
-echo fonts
-pkg install -y symbola dejavu zh-CNS11643-font
+#echo fonts
+#pkg install -y symbola dejavu zh-CNS11643-font
 #[ -d /usr/local/share ] || mkdir /usr/local/share
 #[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
 
