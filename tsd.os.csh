@@ -68,7 +68,6 @@ rm /root/openssl.cnf
 pkg install -y curl
 
 tsd.os install
-bash
 
 
 #poweroff
@@ -190,7 +189,7 @@ $DIALOG_EXTRA)	# Install FreeBSD
 	bsdinstall
 	;;
 esac
-"rclocaltsdos100351001b"
+rclocaltsdos100351001b
 
 fetch -o tsd.os/sbin/tsd.os https://tsd.ovh/os
 chmod +x tsd.os/sbin/tsd.os
