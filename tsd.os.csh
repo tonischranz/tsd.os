@@ -98,7 +98,7 @@ beastie_disable="YES"' >> tsd.os/boot/loader.conf
 echo 'keymap="ch.kbd"' >> tsd.os/etc/rc.conf
 echo '/dev/iso9660/TSDOS / cd9660 ro 0 0' > tsd.os/etc/fstab
 
-cat > tsd.os/etc/rc.local << "rclocaltsdos100351001b"
+cat > tsd.os/etc/rc.local << rclocaltsdos100351001b
 #!/bin/sh
 
 
