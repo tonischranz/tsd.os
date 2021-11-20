@@ -28,13 +28,13 @@ pkg install -y bash curl sudo
 echo Setting up user account $MyUser
 pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
 
-echo setting up gettytab / ttys
-echo "# WB: autologin console as user mha\
-A|Alu|Autologin user console:\
-        :ht:np:sp#115200:al=$MyUser" >> /etc/gettytab
+#echo setting up gettytab / ttys
+#echo "# WB: autologin console as user mha\
+#A|Alu|Autologin user console:\
+#        :ht:np:sp#115200:al=$MyUser" >> /etc/gettytab
 echo 'console	none				unknown	off insecure\
 #\
-ttyv0	"/usr/libexec/getty Alu"		xterm	onifexists secure\
+ttyv0	"/usr/libexec/getty Al"		xterm	onifexists secure\
 # Virtual terminals\
 ttyv1	"/usr/libexec/getty Pc"		xterm	onifexists secure\
 ttyv2	"/usr/libexec/getty Pc"		xterm	onifexists secure\
