@@ -25,7 +25,7 @@ pkg install -y bash curl sudo
 
 #[ -w / ] && pkg install -y sudo
 #([ -w / ] && grep $MyUser /etc/passwd)\
-echo Setting up user account
+echo Setting up user account $MyUser
 pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
 
 echo setting up gettytab / ttys
@@ -83,6 +83,7 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 #&& kldstat | ! grep i915kms\.ko\
 && ([ -w /boot/modules ] || mount -t tmpfs -o size=100M tmpfs /boot/modules)\
 && pkg install -y drm-kmod\
+&& kldload drm
 && kldload i915kms
 
 echo fonts
