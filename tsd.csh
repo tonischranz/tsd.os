@@ -25,33 +25,33 @@ pkg install -y bash curl sudo
 
 #[ -w / ] && pkg install -y sudo
 #([ -w / ] && grep $MyUser /etc/passwd)\
-echo Setting up user account \
+echo Setting up user account
 pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
 
 echo setting up gettytab / ttys
 echo "# WB: autologin console as user mha\
 A|Alu|Autologin user console:\
         :ht:np:sp#115200:al=$MyUser" >> /etc/gettytab
-echo 'console	none				unknown	off insecure
-#
-ttyv0	"/usr/libexec/getty Alu"		xterm	onifexists secure
-# Virtual terminals
-ttyv1	"/usr/libexec/getty Pc"		xterm	onifexists secure
-ttyv2	"/usr/libexec/getty Pc"		xterm	onifexists secure
-ttyv3	"/usr/libexec/getty Pc"		xterm	onifexists secure
-ttyv4	"/usr/libexec/getty Pc"		xterm	onifexists secure
-ttyv5	"/usr/libexec/getty Pc"		xterm	onifexists secure
-ttyv6	"/usr/libexec/getty Pc"		xterm	onifexists secure
-ttyv7	"/usr/libexec/getty Pc"		xterm	onifexists secure
-ttyv8	"/usr/local/bin/xdm -nodaemon"	xterm	off secure
-# Serial terminals
-# The dialup keyword identifies dialin lines to login, fingerd etc.
-ttyu0	"/usr/libexec/getty 3wire"	vt100	onifconsole secure
-ttyu1	"/usr/libexec/getty 3wire"	vt100	onifconsole secure
-ttyu2	"/usr/libexec/getty 3wire"	vt100	onifconsole secure
-ttyu3	"/usr/libexec/getty 3wire"	vt100	onifconsole secure
-# Dumb console
-dcons	"/usr/libexec/getty std.9600"	vt100	off secure"' > /etc/ttys
+echo 'console	none				unknown	off insecure\
+#\
+ttyv0	"/usr/libexec/getty Alu"		xterm	onifexists secure\
+# Virtual terminals\
+ttyv1	"/usr/libexec/getty Pc"		xterm	onifexists secure\
+ttyv2	"/usr/libexec/getty Pc"		xterm	onifexists secure\
+ttyv3	"/usr/libexec/getty Pc"		xterm	onifexists secure\
+ttyv4	"/usr/libexec/getty Pc"		xterm	onifexists secure\
+ttyv5	"/usr/libexec/getty Pc"		xterm	onifexists secure\
+ttyv6	"/usr/libexec/getty Pc"		xterm	onifexists secure\
+ttyv7	"/usr/libexec/getty Pc"		xterm	onifexists secure\
+ttyv8	"/usr/local/bin/xdm -nodaemon"	xterm	off secure\
+# Serial terminals\
+# The dialup keyword identifies dialin lines to login, fingerd etc.\
+ttyu0	"/usr/libexec/getty 3wire"	vt100	onifconsole secure\
+ttyu1	"/usr/libexec/getty 3wire"	vt100	onifconsole secure\
+ttyu2	"/usr/libexec/getty 3wire"	vt100	onifconsole secure\
+ttyu3	"/usr/libexec/getty 3wire"	vt100	onifconsole secure\
+# Dumb console\
+dcons	"/usr/libexec/getty std.9600"	vt100	off secure' > /etc/ttys
 #[ -w / ] || set MyUser=tsdos
 
 #mkdir -p /home/$MyUser
