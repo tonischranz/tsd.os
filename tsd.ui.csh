@@ -1,3 +1,13 @@
+echo "                                                                  ////////////////"
+echo "                                                         ///////////////////////////"
+echo "                                                  ///////////////////////"
+echo " _________________________________________///////////////////"
+echo "/--------------------------------- ____ ///o////////"
+echo "|---------------------------------/      //////"
+echo "|   tsd.os Desktop               /"
+echo " \______________________________/"
+echo
+
 echo x
 [ -f /root/.x ] \
 || echo writing .x \
@@ -15,7 +25,7 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 && kldload drm
 && kldload i915kms
 
-echo fonts
+echo xorg i3 fonts tools
 pkg install -y xorg-minimali3 i3status dmenu rxvt-unicode xterm setxkbmap
 pkg install -y symbola dejavu zh-CNS11643-font
 pkg install -y firefox feh

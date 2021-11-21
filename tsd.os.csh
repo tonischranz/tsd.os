@@ -18,6 +18,7 @@ echo
 
 [ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
        tsd.os install       - install pkgs\
+	   tsd.os ui			- install xorg,firefox
        tsd.os <dev>         - create live usb"; echo
 
 if ("$1" == install) then
@@ -41,14 +42,6 @@ mount -t tmpfs -o size=3512M tmpfs /var/cache/pkg
 mount -t tmpfs -o size=12512M tmpfs /usr/local
 mount -t tmpfs -o size=512M tmpfs /root
 
-
-echo tmpfs mounted, creating home
-#mount -t tmpfs -o size=15120M tmpfs /home && mkdir /home/tsdos
-
-set tsd_hostname=`hostname` 
-echo current hostname: $tsd_hostname	
-#mkdir /home/tsdos/$tsd_hostname
-
 cp /etc/ssl/openssl.cnf /root
 mount -t tmpfs -o size=20M tmpfs /etc/ssl
 cp /root/openssl.cnf /etc/ssl
@@ -57,9 +50,6 @@ rm /root/openssl.cnf
 pkg install -y curl
 
 tsd.os install
-
-
-#poweroff
 
 else
 [ -n "$1" ] || exit
@@ -185,6 +175,9 @@ fetch -o tsd.os/sbin/tsd.os https://tsd.ovh/os
 chmod +x tsd.os/sbin/tsd.os
 tsd.os/sbin/tsd.os | gzip > tsd.os/usr/share/man/man1/tsd.os.1.gz
 mkdir tsd.os/home
+mkdir tsd.os/usr/src
+mkdir tsd.os/usr/ports
+
 
 echo creating efi boot img
 dd if=/dev/zero of=efiboot.img bs=4k count=10240
