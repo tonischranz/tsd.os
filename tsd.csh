@@ -56,44 +56,10 @@ ttyu3	"/usr/libexec/getty 3wire"	vt100	onifconsole secure\
 # Dumb console\
 dcons	"/usr/libexec/getty std.9600"	vt100	off secure' > /etc/ttys
 
-echo x
-[ -f /root/.x ] \
-|| echo writing .x \
-&& echo 'startx' > /root/.x
 
-echo checking for video driver
-pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
-&& ([ -w /boot/modules ] || mount -t tmpfs -o size=100M tmpfs /boot/modules)\
-&& pkg install -y drm-kmod\
-&& kldload drm
-&& kldload i915kms
-
-#echo fonts
-#pkg install -y symbola dejavu zh-CNS11643-font
-#[ -d /usr/local/share ] || mkdir /usr/local/share
-#[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
-
-## ToDo:
 pkg install -y vim mc
-
-#[ -w / ] || pkg install -AIy tpm-emulator
-#[ -w / ] || pkg install -y xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu font-awesome webfonts zh-CNS11643-font && (. ~/.x &)
-#[ -w / ] || exit 0
 
 grep UTF-8 /etc/profile \
 || (echo Setting Language/charset in profile \
 && echo 'LANG="en_US.UTF-8" \
 MM_CHARSET="UTF-8"' >> /etc/profile)
-
-#pciconf -lv | grep -B3 display | grep 'UHD Graphics 630' \
-#&& echo 'kld_list="/boot/modules/i915kms.ko"' >> /etc/rc.conf
-
-#grep loader_logo /boot/loader.conf \
-#|| echo Setting beastie logo \
-#&& echo 'loader_logo="beastie"' >> /boot/loader.conf
-
-#echo sudoers
-#%wheel ALL=(ALL) ALL
-#[ -f /usr/local/etc/sudoers.d/wheel ] \
-#|| echo Enabling sudo  \
-#&& echo "%wheel ALL=(ALL) ALL" > /usr/local/etc/sudoers.d/wheel
