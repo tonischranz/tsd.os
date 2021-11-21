@@ -158,7 +158,6 @@ dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extr
 
 case $? in
 $DIALOG_OK)	# tsd.os
-	echo first try
 	tsd.os live
 	;;
 $DIALOG_CANCEL)	# Cancel
@@ -175,7 +174,6 @@ fetch -o tsd.os/sbin/tsd.os https://tsd.ovh/os
 chmod +x tsd.os/sbin/tsd.os
 tsd.os/sbin/tsd.os | gzip > tsd.os/usr/share/man/man1/tsd.os.1.gz
 mkdir tsd.os/home
-mkdir tsd.os/usr/src
 mkdir tsd.os/usr/ports
 
 
