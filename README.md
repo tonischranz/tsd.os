@@ -7,7 +7,7 @@ hash tsd.os || fetch -o - https://tsd.ovh/os | csh
 ```
 
 ```
-                                                                  ////////////////
+FreeBSD live-system by tsd.                                       ////////////////
                                                          ///////////////////////////
                                                   ///////////////////////
  _________________________________________///////////////////
@@ -18,6 +18,7 @@ hash tsd.os || fetch -o - https://tsd.ovh/os | csh
 
 Usage: tsd.os live          - boot live system
        tsd.os install       - install pkgs
+       tsd.os ui            - install xorg,firefox
        tsd.os <dev>         - create live usb
 
 ```
