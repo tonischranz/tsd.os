@@ -21,18 +21,18 @@ echo changing root shell
 pw usermod root -s /usr/local/bin/bash
 
 echo writing .profile
-[ -f /root/.profile ] || echo "\
+[ -f /root/.profile ] || echo '\
 EDITOR=vim;   	export EDITOR\
 PAGER=more;  	export PAGER\
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
-LANG=\"en_US.UTF-8\"; export LANG\
-MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
+LANG="en_US.UTF-8"; export LANG\
+MM_CHARSET="UTF-8"; export MM_CHARSET\
 \
 [ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash\
 \
 if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
 hash startx || bash\
-hash startx && (. ~/.x &)" > /root/.profile
+hash startx && (. ~/.x &)' > /root/.profile
 
 echo setting up ttys
 echo 'console	none				unknown	off insecure\
