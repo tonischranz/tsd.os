@@ -18,7 +18,7 @@ echo
 
 [ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
        tsd.os install       - install pkgs\
-	   tsd.os ui			- install xorg,firefox\
+       tsd.os ui			- install xorg,firefox\
        tsd.os <dev>         - create live usb"; echo
 
 if ("$1" == install) then
