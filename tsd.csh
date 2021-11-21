@@ -9,10 +9,10 @@ echo " \______________________________/"
 echo
 
 
-set MyUser=`hostname | cut -d "-" -f1`
+#set MyUser=`hostname | cut -d "-" -f1`
 
-set MyName="FreeBSD User"
-set MyGroups="operator video wheel"
+#set MyName="FreeBSD User"
+#set MyGroups="operator video wheel"
 
 [ `id -u` -gt 0 ] && echo this script must be run as root && exit
 
@@ -21,16 +21,19 @@ set etc_dir=`mktemp -d`
 mount -t unionfs $etc_dir /etc
  
 echo Installing/updating packages
-pkg install -y bash curl sudo
+pkg install -y bash curl
 
 #[ -w / ] && pkg install -y sudo
 #([ -w / ] && grep $MyUser /etc/passwd)\
-echo making home writable
-mount -t tmpfs -o size=15120M tmpfs /home
+#echo making home writable
+#mount -t tmpfs -o size=15120M tmpfs /home
 
-echo Setting up user account $MyUser
-pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
-[ -d /home/$MyUser ] || mkdir /home/$MyUser
+echo changing root shell
+pw usermod root -s /usr/local/bin/bash
+
+#echo Setting up user account $MyUser
+#pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/local/bin/bash
+#[ -d /home/$MyUser ] || mkdir /home/$MyUser
 
 #echo setting up gettytab / ttys
 #echo "# WB: autologin console as user $MyUser\
@@ -61,23 +64,25 @@ dcons	"/usr/libexec/getty std.9600"	vt100	off secure' > /etc/ttys
 
 #mkdir -p /home/$MyUser
 
-#echo x
-#[ -f /home/$MyUser/.x ] \
-#|| echo writing .x \
-#&& echo '[ "$SHLVL" == 1 ] && hash startx && startx\
-#[ "$SHLVL" == 1 ] && hash startx && poweroff' > "/home/$MyUser/.x"
+echo x
+[ -f /root/.x ] \
+|| echo writing .x \
+&& echo 'startx' > /root/.x
 
-echo profile SKIP
+echo profile
 #[ -f /home/$MyUser/.profile ] || echo "HOME=/home/$MyUser; export HOME\
-#[ -f ~/.profile ] || echo "
-#EDITOR=vim;   	export EDITOR\
-#PAGER=more;  	export PAGER\
-#PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
-#LANG=\"en_US.UTF-8\"; export LANG\
-#MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
+[ -f /root/.profile ] || echo "
+EDITOR=vim;   	export EDITOR\
+PAGER=more;  	export PAGER\
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:~/bin; export PATH\
+LANG=\"en_US.UTF-8\"; export LANG\
+MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
 
-#if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
-#hash startx && (. ~/.x &)" > ~/.profile
+[ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash
+
+if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
+hash startx || bash
+hash startx && (. ~/.x &)" > /root/.profile
 echo bashrc
 
 #[ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash
@@ -85,7 +90,6 @@ echo bashrc
 
 echo checking for video driver
 pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
-#&& kldstat | ! grep i915kms\.ko\
 && ([ -w /boot/modules ] || mount -t tmpfs -o size=100M tmpfs /boot/modules)\
 && pkg install -y drm-kmod\
 && kldload drm
@@ -97,6 +101,8 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 #[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
 
 ## ToDo:
+pkg install -y vim mc
+
 #[ -w / ] || pkg install -AIy tpm-emulator
 #[ -w / ] || pkg install -y xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu font-awesome webfonts zh-CNS11643-font && (. ~/.x &)
 #[ -w / ] || exit 0
@@ -113,8 +119,8 @@ MM_CHARSET="UTF-8"' >> /etc/profile)
 #|| echo Setting beastie logo \
 #&& echo 'loader_logo="beastie"' >> /boot/loader.conf
 
-echo sudoers
+#echo sudoers
 #%wheel ALL=(ALL) ALL
-[ -f /usr/local/etc/sudoers.d/wheel ] \
-|| echo Enabling sudo  \
-&& echo "%wheel ALL=(ALL) ALL" > /usr/local/etc/sudoers.d/wheel
+#[ -f /usr/local/etc/sudoers.d/wheel ] \
+#|| echo Enabling sudo  \
+#&& echo "%wheel ALL=(ALL) ALL" > /usr/local/etc/sudoers.d/wheel
