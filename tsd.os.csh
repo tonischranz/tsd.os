@@ -23,19 +23,8 @@ echo
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
 
-#else if ("$1" == uefi) then
-#	set tsd_dir=`mktemp -d`; cd $tsd_dir
-#	set tsd_efi=`gpart show -lp | grep efi | awk '{print $3}' | head -n1`
-#	newfs_msdos -F 32 -c 1 -m 0xf8 /dev/$tsd_efi
-#	mkdir efi; mount -t msdosfs /dev/$tsd_mde efi/
-#	mkdir -p efi/EFI/BOOT; cp mnt/boot/loader.efi efi/EFI/BOOT/BOOTX64.efi
-#	reboot
-
-#else if ("$1" == inject) then
-#	fetch -o /mnt/sbin/tsd.os https://tsd.ovh/os
-#	chmod +x /mnt/sbin/tsd.os
-#	echo "tsd.os install" > /mnt/root/.tsd.firstrun
-#	echo "[ -f ~/.tsd.firstrun ] && . ~/.tsd.firstrun && rm -f ~/.tsd.firstrun" >> /mnt/etc/rc.local	
+else if ("$1" == ui) then
+	curl https://tsd.ovh/cu | csh
 
 else if ("$1" == live) then
 [ -w / ] && (echo / must be mounted readonly for live-system; exit 1)
@@ -175,7 +164,7 @@ bsdinstall keymap
 bsdinstall hostname
 bsdinstall netconfig
 
-dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install" --ok-label "Live" --cancel-label "Cancel" --yesno "What you want to do?" 0 0
+dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install" --ok-label "Live" --cancel-label "Desktop" --yesno "What you want to do?" 0 0
 
 case $? in
 $DIALOG_OK)	# tsd.os
@@ -183,7 +172,8 @@ $DIALOG_OK)	# tsd.os
 	tsd.os live
 	;;
 $DIALOG_CANCEL)	# Cancel
-	init 6
+	tsd.os live
+	tsd.os ui
 	;;
 $DIALOG_EXTRA)	# Install FreeBSD
 	bsdinstall
