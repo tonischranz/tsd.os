@@ -33,12 +33,13 @@ pw user add -n $MyUser -c "$MyName" -d /home/$MyUser -G "$MyGroups" -s /usr/loca
 [ -d /home/$MyUser ] || mkdir /home/$MyUser
 
 #echo setting up gettytab / ttys
-echo "# WB: autologin console as user $MyUser\
-Al|Autologin user console:\
-        :al=$MyUser:ht:np:sp#9600" >> /etc/gettytab
+#echo "# WB: autologin console as user $MyUser\
+#Al|Autologin user console:\
+#        :al=$MyUser:ht:np:sp#9600" >> /etc/gettytab
+echo setting up ttys
 echo 'console	none				unknown	off insecure\
 #\
-ttyv0	"/usr/libexec/getty Al"		xterm	onifexists secure\
+ttyv0	"/usr/libexec/getty autologin"	xterm	onifexists secure\
 # Virtual terminals\
 ttyv1	"/usr/libexec/getty Pc"		xterm	onifexists secure\
 ttyv2	"/usr/libexec/getty Pc"		xterm	onifexists secure\
