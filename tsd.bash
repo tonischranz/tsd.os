@@ -775,8 +775,6 @@ aai chromium-browser
 xi setup-xorg-base i3wm startx "ttf-dejavu ttf-font-awesome ttf-ancient-fonts xf86-video-fbdev rxvt-unicode"
 
 pkgi vscode
-pkgi gimp
-pkgi inkscape
 pkgi chrome chromium
 pkgi feh
 pkgi firefox
@@ -793,7 +791,7 @@ pkgi pitivi
 pkgi openshot
 pkgi shotcutter
 pkgi vid.stab
-pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu font-awesome webfonts zh-CNS11643-font"
+pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu symbola zh-CNS11643-font"
 pkgi rdesktop
 pkgi freerdp
 pkgi xrdp
