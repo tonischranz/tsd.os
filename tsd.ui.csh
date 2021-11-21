@@ -30,4 +30,4 @@ pkg install -y xorg-minimal i3 i3status dmenu rxvt-unicode xterm setxkbmap
 pkg install -y symbola dejavu zh-CNS11643-font
 pkg install -y firefox feh
 #[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
-[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/ttf-ancient-fonts/2.60-1.1/ttf-ancient-fonts_2.60.orig.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/ttf-ancient-fonts-2.60.orig/* /usr/local/share/
+#[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/ttf-ancient-fonts/2.60-1.1/ttf-ancient-fonts_2.60.orig.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/ttf-ancient-fonts-2.60.orig/* /usr/local/share/
