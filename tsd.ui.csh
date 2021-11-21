@@ -26,7 +26,7 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 && kldload i915kms
 
 echo xorg i3 fonts tools
-pkg install -y xorg-minimali3 i3status dmenu rxvt-unicode xterm setxkbmap
+pkg install -y xorg-minimal i3 i3status dmenu rxvt-unicode xterm setxkbmap
 pkg install -y symbola dejavu zh-CNS11643-font
 pkg install -y firefox feh
 #[ -d /usr/local/share ] || mkdir /usr/local/share
