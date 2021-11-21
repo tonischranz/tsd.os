@@ -566,13 +566,13 @@ general {
         interval = 1
 }
 
-order += "wireless _first_"
-order += "ipv6"
-order += "ethernet _first_"
+#order += "wireless _first_"
+#order += "ipv6"
+#order += "ethernet _first_"
 #order += "battery all"
-order += "cpu_usage"
-order += "memory"
-order += "disk /"
+#order += "cpu_usage"
+#order += "memory"
+#order += "disk /"
 order += "tztime local"
 
 wireless _first_ {
