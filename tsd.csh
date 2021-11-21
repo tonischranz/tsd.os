@@ -31,7 +31,7 @@ MM_CHARSET=\"UTF-8\"; export MM_CHARSET\
 [ -f ~/.bashrc ] || curl https://tsd.ovh/b | bash\
 \
 if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi\
-hash startx || bash
+hash startx || bash\
 hash startx && (. ~/.x &)" > /root/.profile
 
 echo setting up ttys
