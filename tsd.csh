@@ -64,7 +64,3 @@ grep UTF-8 /etc/profile \
 && echo 'LANG="en_US.UTF-8" \
 MM_CHARSET="UTF-8"' >> /etc/profile)
 
-mkdir /tmp/base
-mount -t tmpfs -o size=8G tmpfs /tmp/base/
-cd /tmp/base/
-curl https://download.freebsd.org/ftp/releases/amd64/13.0-RELEASE/base.txz -o base.txz && tar -xJf base.txz && mount -t unionfs /tmp/base/usr/include/ /usr/include/ &&  mount -t unionfs /tmp/base/usr/lib/ /usr/lib/ && echo overlayed lib/include 
