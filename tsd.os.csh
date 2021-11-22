@@ -165,11 +165,11 @@ bsdinstall netconfig
 dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install FreeBSD" --ok-label "Desktop" --cancel-label "shell" --yesno "What you want to do?" 0 0
 
 case $? in
-$DIALOG_OK)	# tsd.os
+$DIALOG_OK)	# tsd.os Desktop
 	tsd.os live
 	tsd.os ui
 	;;
-$DIALOG_CANCEL)	# Cancel	
+$DIALOG_CANCEL)	# tsd.os shell	
 	tsd.os live
 	;;
 $DIALOG_EXTRA)	# Install FreeBSD
