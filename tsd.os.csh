@@ -6,7 +6,7 @@ set fbsd_arch=amd64
 set fbsd_fam=amd64
 set fbsd_rel=13.0
 
-echo "FreeBSD live-system by tsd.                                       ////////////////
+echo "FreeBSD live-system by tsd.                                       ////////////////"
 echo "                                                         ///////////////////////////"
 echo "                                                  ///////////////////////"
 echo " _________________________________________///////////////////"
