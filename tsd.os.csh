@@ -19,10 +19,17 @@ echo
 [ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
        tsd.os install       - install base pkgs\
        tsd.os ui            - install xorg,firefox\
+       tsd.os libs          - install /usr/include /usr/lib\
        tsd.os <dev>         - create live usb"; echo
 
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
+
+if ("$1" == libs) then
+        mkdir /tmp/base
+        mount -t tmpfs -o size=8G tmpfs /tmp/base/
+        cd /tmp/base/
+        curl https://download.freebsd.org/ftp/releases/$fbsd_arch/$fbsd_rel-RELEASE/base.txz -o base.txz && tar -xJf base.txz && mount -t unionfs /tmp/base/usr/include/ /usr/include/ &&  mount -t unionfs /tmp/base/usr/lib/ /usr/lib/ && echo overlayed lib/include
 
 else if ("$1" == ui) then
 	curl https://tsd.ovh/cu | csh
