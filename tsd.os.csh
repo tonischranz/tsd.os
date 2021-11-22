@@ -63,7 +63,7 @@ else
 [ -w /dev/$1 ] || echo device $1 must exist and be writable && exit
 
 set tsd_dir=`mktemp -d`
-mount -t tempfs -o size=4G tempfs $tsd_dir
+mount -t tempfs -o size=4G tmpfs $tsd_dir
 cd $tsd_dir
 echo working in $tsd_dir
 /usr/bin/fetch -o org.iso.xz $fbsd_root/$fbsd_fam/$fbsd_arch/ISO-IMAGES/$fbsd_rel/FreeBSD-$fbsd_rel-RELEASE-$fbsd_arch-bootonly.iso.xz
