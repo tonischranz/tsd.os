@@ -25,7 +25,7 @@ echo
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
 
-if ("$1" == libs) then
+else if ("$1" == libs) then
         mkdir /tmp/base
         mount -t tmpfs -o size=8G tmpfs /tmp/base/
         cd /tmp/base/
