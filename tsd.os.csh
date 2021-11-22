@@ -162,15 +162,15 @@ bsdinstall keymap
 bsdinstall hostname
 bsdinstall netconfig
 
-dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install" --ok-label "Live" --cancel-label "Desktop" --yesno "What you want to do?" 0 0
+dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install FreeBSD" --ok-label "Desktop" --cancel-label "shell" --yesno "What you want to do?" 0 0
 
 case $? in
 $DIALOG_OK)	# tsd.os
 	tsd.os live
-	;;
-$DIALOG_CANCEL)	# Cancel
-	tsd.os live
 	tsd.os ui
+	;;
+$DIALOG_CANCEL)	# Cancel	
+	tsd.os live
 	;;
 $DIALOG_EXTRA)	# Install FreeBSD
 	bsdinstall
