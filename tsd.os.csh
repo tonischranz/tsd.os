@@ -1,10 +1,10 @@
 #!/bin/csh
 hash tsd.os || (hash fetch && mkdir -p ~/bin && fetch -o ~/bin/tsd.os https://tsd.ovh/os && chmod +x ~/bin/tsd.os)
 
-set fbsd_root=https://download.freebsd.org/ftp/releases
+#set fbsd_root=https://download.freebsd.org/ftp/releases
+set fbsd_root=http://ftp.ch.freebsd.org/pub/FreeBSD/releases
 set fbsd_arch=amd64
-set fbsd_fam=amd64
-set fbsd_rel=13.0
+set fbsd_rel="13.0"
 
 echo "                                                                  ////////////////"
 echo "  FreeBSD live-system by tsd.                            ///////////////////////////"
@@ -60,7 +60,7 @@ set tsd_dir=`mktemp -d`
 mount -t tmpfs -o size=4G tmpfs $tsd_dir
 cd $tsd_dir
 echo working in $tsd_dir
-/usr/bin/fetch -o org.iso.xz $fbsd_root/$fbsd_fam/$fbsd_arch/ISO-IMAGES/$fbsd_rel/FreeBSD-$fbsd_rel-RELEASE-$fbsd_arch-bootonly.iso.xz
+/usr/bin/fetch -o org.iso.xz $fbsd_root/ISO-IMAGES/$fbsd_rel/FreeBSD-$fbsd_rel-RELEASE-$fbsd_arch-bootonly.iso.xz
 unxz org.iso.xz
 echo creating mount device
 set tsd_md=`mdconfig -a -t vnode -f org.iso | cut -d " " -f1`
@@ -81,7 +81,6 @@ echo '/dev/iso9660/TSDOS / cd9660 ro 0 0' > tsd.os/etc/fstab
 
 cat > tsd.os/etc/rc.local << "rclocaltsdos100351001b"
 #!/bin/sh
-
 
 : ${DIALOG_OK=0}
 : ${DIALOG_CANCEL=1}
@@ -175,6 +174,7 @@ esac
 fetch -o tsd.os/sbin/tsd.os https://tsd.ovh/os
 chmod +x tsd.os/sbin/tsd.os
 tsd.os/sbin/tsd.os | gzip > tsd.os/usr/share/man/man1/tsd.os.1.gz
+
 mkdir tsd.os/home
 mkdir tsd.os/usr/ports
 
