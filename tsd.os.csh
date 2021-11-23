@@ -162,14 +162,14 @@ bsdinstall keymap
 bsdinstall hostname
 bsdinstall netconfig
 
-dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install FreeBSD" --ok-label "Desktop" --cancel-label "shell" --yesno "What you want to do?" 0 0
+dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install FreeBSD" --ok-label "Desktop" --cancel-label "Shell" --yesno "What you want to do?" 0 0
 
 case $? in
 $DIALOG_OK)	# tsd.os Desktop
 	tsd.os live
 	tsd.os ui
 	;;
-$DIALOG_CANCEL)	# tsd.os shell	
+$DIALOG_CANCEL)	# tsd.os Shell	
 	tsd.os live
 	;;
 $DIALOG_EXTRA)	# Install FreeBSD
@@ -201,6 +201,6 @@ mdconfig -d -u $tsd_md
 mdconfig -d -u $tsd_mde
 
 echo building iso and flashing it to device
-makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && dd if=tsd.os.iso of=/dev/$1 bs=4k status=progress
+makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
 echo finished
 endif
