@@ -36,26 +36,20 @@ else if ("$1" == ui) then
 
 else if ("$1" == live) then
 [ -w / ] && (echo / must be mounted readonly for live-system; exit 1)
-
 mkdir -p /var/cache/pkg
-
 echo checking for swap
 gpart show -p | awk '/freebsd-swap/{system("swapon /dev/" $3)}'
 swapinfo -h
-
 echo creating tmpfs
 mount -t tmpfs -o size=1512M tmpfs /var/db/pkg
 mount -t tmpfs -o size=3512M tmpfs /var/cache/pkg
 mount -t tmpfs -o size=12512M tmpfs /usr/local
 mount -t tmpfs -o size=512M tmpfs /root
-
 cp /etc/ssl/openssl.cnf /root
 mount -t tmpfs -o size=20M tmpfs /etc/ssl
 cp /root/openssl.cnf /etc/ssl
 rm /root/openssl.cnf
-
 pkg install -y curl
-
 tsd.os install
 
 else
@@ -183,7 +177,6 @@ chmod +x tsd.os/sbin/tsd.os
 tsd.os/sbin/tsd.os | gzip > tsd.os/usr/share/man/man1/tsd.os.1.gz
 mkdir tsd.os/home
 mkdir tsd.os/usr/ports
-
 
 echo creating efi boot img
 dd if=/dev/zero of=efiboot.img bs=4k count=10240
