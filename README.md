@@ -19,7 +19,7 @@ FreeBSD live-system by tsd.                                       //////////////
 Usage: tsd.os live          - boot live system
        tsd.os install       - install pkgs
        tsd.os ui            - install xorg,firefox
-       tsd.os base          - install /usr/bin /usr/include /usr/lib
+       tsd.os cc            - install clang/headers/libs
        tsd.os <dev>         - create live usb
 
 ```
