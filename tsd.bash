@@ -175,7 +175,8 @@ alias leave='resetfiles; __restore_all; [ -f ~/.viminfo ] && rm ~/.viminfo; exit
 
 hash librecad && alias cad='librecad'
 hash virtualbox && alias vbox='virtualbox'
-hash vscode && ! hash code && alias code="vscode"
+hash vscode && ! hash code && alias code='vscode'
+[ `id -u` -gt 0 ] || alias vscode='vscode --user-data-dir ~/.vscode_root'
 
 alias l='lynx'
 alias c='curl'
