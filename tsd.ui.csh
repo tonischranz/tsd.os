@@ -31,9 +31,3 @@ pkg install -y symbola dejavu zh-CNS11643-font
 pkg install -y firefox feh
 #[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://repo.arcanis.me/repo/x86_64/ttf-ancient-fonts-2.60-1-any.pkg.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/usr/share/* /usr/local/share/
 #[ -f /usr/local/share/fonts/TTF/Aegean.ttf ] || curl https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/ttf-ancient-fonts/2.60-1.1/ttf-ancient-fonts_2.60.orig.tar.xz | tar -xJf - -C /tmp && cp -r /tmp/ttf-ancient-fonts-2.60.orig/* /usr/local/share/
-
-echo 'mkdir /tmp/base
-mount -t tmpfs -o size=8G tmpfs /tmp/base/
-cd /tmp/base/
-curl https://download.freebsd.org/ftp/releases/amd64/13.0-RELEASE/base.txz -o base.txz && tar -xJf base.txz && mount -t unionfs /tmp/base/usr/include/ /usr/include/ &&  mount -t unionfs /tmp/base/usr/lib/ /usr/lib/ && echo overlayed lib/include' > baseovl
-. baseovl &
