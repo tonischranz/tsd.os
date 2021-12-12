@@ -27,5 +27,5 @@ pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
 
 echo xorg i3 fonts tools
 pkg install -y xorg-minimal i3 i3status dmenu rxvt-unicode xterm setxkbmap
-pkg install -y symbola dejavu zh-CNS11643-font
+pkg install -y noto symbola dejavu zh-CNS11643-font
 pkg install -y firefox feh
