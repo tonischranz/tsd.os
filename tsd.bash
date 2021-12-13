@@ -117,8 +117,8 @@ fi
 [[ $PS1 && -f /usr/local/share/bash-completion/bash_completion.sh ]] && \
 source /usr/local/share/bash-completion/bash_completion.sh
 
-[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
 [ -f /usr/local/share/git-core/contrib/completion/git-completion.bash ] && . /usr/local/share/git-core/contrib/completion/git-completion.bash
+[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
 [ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
 
 #################################################
