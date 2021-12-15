@@ -117,8 +117,8 @@ fi
 [[ $PS1 && -f /usr/local/share/bash-completion/bash_completion.sh ]] && \
 source /usr/local/share/bash-completion/bash_completion.sh
 
-[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
 [ -f /usr/local/share/git-core/contrib/completion/git-completion.bash ] && . /usr/local/share/git-core/contrib/completion/git-completion.bash
+[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
 [ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
 
 #################################################
@@ -175,7 +175,8 @@ alias leave='resetfiles; __restore_all; [ -f ~/.viminfo ] && rm ~/.viminfo; exit
 
 hash librecad && alias cad='librecad'
 hash virtualbox && alias vbox='virtualbox'
-hash vscode && ! hash code && alias code="vscode"
+hash vscode && ! hash code && alias code='vscode'
+[ `id -u` -gt 0 ] || alias vscode='vscode --user-data-dir ~/.vscode_root'
 
 alias l='lynx'
 alias c='curl'
@@ -725,7 +726,7 @@ pkgi curl
 pkgi git
 pkgi vim
 pkgi lynx
-pkgi php
+pkgi php php80
 pkgi npm
 pkgi ranger
 pkgi mc

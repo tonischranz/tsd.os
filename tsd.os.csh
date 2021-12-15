@@ -19,13 +19,13 @@ echo
 [ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
        tsd.os install       - install base pkgs\
        tsd.os ui            - install xorg,firefox\
-       tsd.os base          - install /usr/bin /usr/include /usr/lib\
+       tsd.os cc            - install clang/headers/libs\
        tsd.os <dev>         - create live usb"; echo
 
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
 
-else if ("$1" == base) then
+else if ("$1" == cc) then
         mkdir /tmp/base
         mount -t tmpfs -o size=8G tmpfs /tmp/base/
         cd /tmp/base/
