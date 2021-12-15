@@ -19,7 +19,7 @@ echo xinit
 && echo 'setxkbmap ch; i3' > /root/.xinitrc
 
 echo checking for video driver
-pciconf -lv | grep -B3 display | grep 'UHD Graphics 630'\
+pciconf -lv | grep -B3 display | grep 'Intel Corporation'\
 && ([ -w /boot/modules ] || mount -t tmpfs -o size=100M tmpfs /boot/modules)\
 && pkg install -y drm-kmod\
 && kldload drm
