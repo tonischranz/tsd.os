@@ -51,7 +51,7 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 shopt -s globstar
 
-[ -z $USERNAME ] && USERNAME=$USER
+[ -z "$USERNAME" ] && USERNAME=$USER
 
 #################################################
 # prompt
@@ -270,7 +270,7 @@ BoldWhite=          236, 240, 241
 White=              189, 195, 199
 " > ~/.mintty/themes/toni
 
-if [ $USERNAME == tschranz ]; then
+if [ "$USERNAME" == tschranz ]; then
 [ -f ~/.gitconfig ] || echo "[user]
 	email = toni@mxm.ch
 	name = Toni Schranz - Maxomedia AG
@@ -321,7 +321,7 @@ set wildmenu
 " > ~/.vimrc && echo written .vimrc
 fi
 
-if [ $USERNAME == toni ]; then
+if [ "$USERNAME" == toni ]; then
 [ -f ~/.gitconfig ] || echo "[user]
 	email = toni.schranz@gmail.com
 	name = Toni Schranz
@@ -809,8 +809,8 @@ unset -f ai si
 REPO_HOME=~
 [ -f /git-bash.exe ] && [ -d ~/source/repos ] && REPO_HOME=~/source/repos
 [ -f /git-bash.exe ] && [ -d /h ] && [ -d /d/git ] && REPO_HOME=/d/git
-[ `pwd` == '/' ] && cd
-[ `pwd` == '/h' ] && cd $REPO_HOME
+[ "`pwd`" == '/' ] && cd
+[ "`pwd`" == '/h' ] && cd $REPO_HOME
 
 bashrc100351001B
 
