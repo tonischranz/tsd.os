@@ -197,15 +197,15 @@ echo building iso
 makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o bootimage='i386;/boot/cdboot' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os
 
 echo inject bootcode
-for entry in `etdump --format shell tsd.os.iso`; do
-	eval $entry
-	if [ "$et_platform" = "efi" ]; then
-		espstart=`expr $et_lba \* 2048`
-		espsize=`expr $et_sectors \* 512`
-		espparam="-p efi::$espsize:$espstart"
-		break
-	fi
-done
+foreach entry ( `etdump --format shell tsd.os.iso` )
+    eval $entry
+    if [ "$et_platform" = "efi" ]; then
+        espstart=`expr $et_lba \* 2048`
+        espsize=`expr $et_sectors \* 512`
+        espparam="-p efi::$espsize:$espstart"
+        break
+    fi
+end
 
 imgsize=`stat -f %z tsd.os.iso`
 mkimg -s gpt \
