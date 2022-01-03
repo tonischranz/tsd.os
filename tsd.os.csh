@@ -197,7 +197,8 @@ echo building iso
 makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o bootimage='i386;/boot/cdboot' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os
 
 echo inject bootcode
-foreach entry ( `etdump --format shell tsd.os.iso` )
+sh << "hybridcode100351001b"
+for entry in `etdump --format shell tsd.os.iso`; do
     eval $entry
     if [ "$et_platform" = "efi" ]; then
         espstart=`expr $et_lba \* 2048`
@@ -205,7 +206,7 @@ foreach entry ( `etdump --format shell tsd.os.iso` )
         espparam="-p efi::$espsize:$espstart"
         break
     fi
-end
+done
 
 imgsize=`stat -f %z tsd.os.iso`
 mkimg -s gpt \
@@ -214,6 +215,8 @@ mkimg -s gpt \
     -p freebsd-boot:=tsd.os/boot/isoboot \
     $espparam \
     -o hybrid.img
+
+"hybridcode100351001b"
 	
 dd if=hybrid.img of=tsd.os.iso bs=32k count=1 conv=notrunc
 
