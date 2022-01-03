@@ -195,8 +195,29 @@ mdconfig -d -u $tsd_mde
 
 echo building iso
 makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o bootimage='i386;/boot/cdboot' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os
+
 echo inject bootcode
-dd if=org.iso of=tsd.os.iso bs=32k count=1 conv=notrunc
+for entry in `etdump --format shell tsd.os.iso`; do
+	eval $entry
+	if [ "$et_platform" = "efi" ]; then
+		espstart=`expr $et_lba \* 2048`
+		espsize=`expr $et_sectors \* 512`
+		espparam="-p efi::$espsize:$espstart"
+		break
+	fi
+done
+
+imgsize=`stat -f %z tsd.os.iso`
+mkimg -s gpt \
+    --capacity $imgsize \
+    -b tsd.os/boot/pmbr \
+    -p freebsd-boot:=tsd.os/boot/isoboot \
+    $espparam \
+    -o hybrid.img
+	
+dd if=hybrid.img of=tsd.os.iso bs=32k count=1 conv=notrunc
+
+
 echo flashing iso to device
 dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
 echo finished
