@@ -706,7 +706,7 @@ aai curl
 aai git
 aai vim
 aai lynx
-aai php
+aai php php81
 aai npm
 aai ranger
 aai mc
@@ -716,7 +716,7 @@ ai curl
 ai git
 ai vim
 ai lynx
-ai php
+ai php php8.1
 ai npm
 ai ranger
 ai mc
