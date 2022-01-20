@@ -726,7 +726,7 @@ pkgi curl
 pkgi git
 pkgi vim
 pkgi lynx
-pkgi php php80
+pkgi php php81
 pkgi npm
 pkgi ranger
 pkgi mc
