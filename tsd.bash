@@ -215,9 +215,9 @@ hash git && __git_complete push _git_push
 unalias hash
 " > ~/.bash_aliases
 
-! hash dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
-! hash dotnet && [  -d ~/AppData/Local/Microsoft/dotnet ] &&PATH=$PATH:~/AppData/Local/Microsoft/dotnet
-! hash php && [  -d ~/.php ] && PATH=$PATH:~/.php 
+! hash 2>/dev/null dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
+! hash 2>/dev/null dotnet && [  -d ~/AppData/Local/Microsoft/dotnet ] &&PATH=$PATH:~/AppData/Local/Microsoft/dotnet
+! hash 2>/dev/null php && [  -d ~/.php ] && PATH=$PATH:~/.php 
 
 . ~/.bash_aliases
 
