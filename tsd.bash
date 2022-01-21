@@ -215,6 +215,10 @@ hash git && __git_complete push _git_push
 unalias hash
 " > ~/.bash_aliases
 
+! hash dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
+! hash dotnet && [  -d ~/AppData/Local/Microsoft/dotnet ] &&PATH=$PATH:~/AppData/Local/Microsoft/dotnet
+! hash php && [  -d ~/.php ] && PATH=$PATH:~/.php 
+
 . ~/.bash_aliases
 
 #################################################
@@ -698,9 +702,6 @@ function git_clone_ts ()
 #################################################
 # tools
 #################################################
-
-! hash dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
-! hash php && [  -d ~/.php ] && PATH=$PATH:~/.php 
 
 aai curl
 aai git
