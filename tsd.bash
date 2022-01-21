@@ -734,9 +734,9 @@ pkgi htop
 
 if [ -f /git-bash.exe ]; then
 	hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-8.1-nts-Win32-vs16-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && curl https://xdebug.org/files/php_xdebug-3.1.2-8.1-vs16-nts-x86_64.dll -o ~/.php/ext/php_xdebug.dll && unalias php && PATH=$PATH:~/.php && php'
-	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet-core/scripts/v1/dotnet-install.ps1 | powershell && unalias dotnet && PATH=$PATH:~/AppData/Local/Microsoft/dotnet && dotnet'
+	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.ps1 | powershell && unalias dotnet && PATH=$PATH:~/AppData/Local/Microsoft/dotnet && dotnet'
 elif hash curl; then
-	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet-core/scripts/v1/dotnet-install.sh | bash && unalias dotnet && PATH=$PATH:~/.dotnet && dotnet'
+	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh | bash && unalias dotnet && PATH=$PATH:~/.dotnet && dotnet'
 fi
 
 #################################################
