@@ -774,7 +774,7 @@ aai librecad
 aai lbreoffice-calc
 aai fontforge
 aai chromium-browser
-xi setup-xorg-base i3wm startx "ttf-dejavu ttf-font-awesome ttf-ancient-fonts xf86-video-fbdev rxvt-unicode"
+xi setup-xorg-base i3wm startx "ttf-dejavu ttf-font-awesome xf86-video-fbdev rxvt-unicode"
 
 pkgi vscode
 pkgi chrome chromium
