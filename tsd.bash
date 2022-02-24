@@ -215,6 +215,10 @@ hash git && __git_complete push _git_push
 unalias hash
 " > ~/.bash_aliases
 
+! hash 2>/dev/null dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
+! hash 2>/dev/null dotnet && [  -d ~/AppData/Local/Microsoft/dotnet ] &&PATH=$PATH:~/AppData/Local/Microsoft/dotnet
+! hash 2>/dev/null php && [  -d ~/.php ] && PATH=$PATH:~/.php 
+
 . ~/.bash_aliases
 
 #################################################
@@ -699,14 +703,11 @@ function git_clone_ts ()
 # tools
 #################################################
 
-! hash dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
-! hash php && [  -d ~/.php ] && PATH=$PATH:~/.php 
-
 aai curl
 aai git
 aai vim
 aai lynx
-aai php
+aai php php81
 aai npm
 aai ranger
 aai mc
@@ -716,7 +717,7 @@ ai curl
 ai git
 ai vim
 ai lynx
-ai php
+ai php php8.1
 ai npm
 ai ranger
 ai mc
@@ -726,17 +727,17 @@ pkgi curl
 pkgi git
 pkgi vim
 pkgi lynx
-pkgi php php80
+pkgi php php81
 pkgi npm
 pkgi ranger
 pkgi mc
 pkgi htop
 
 if [ -f /git-bash.exe ]; then
-	hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-7.4-nts-Win32-vc15-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && PATH=$PATH:~/.php && php'
-	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet-core/scripts/v1/dotnet-install.ps1 | powershell && unalias dotnet && PATH=$PATH:~/AppData/Local/Microsoft/dotnet && dotnet'
+	hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-8.1-nts-Win32-vs16-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && curl https://xdebug.org/files/php_xdebug-3.1.2-8.1-vs16-nts-x86_64.dll -o ~/.php/ext/php_xdebug.dll && unalias php && PATH=$PATH:~/.php && php'
+	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.ps1 | powershell && unalias dotnet && PATH=$PATH:~/AppData/Local/Microsoft/dotnet && dotnet'
 elif hash curl; then
-	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet-core/scripts/v1/dotnet-install.sh | bash && unalias dotnet && PATH=$PATH:~/.dotnet && dotnet'
+	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh | bash && unalias dotnet && PATH=$PATH:~/.dotnet && dotnet'
 fi
 
 #################################################
@@ -773,7 +774,7 @@ aai librecad
 aai lbreoffice-calc
 aai fontforge
 aai chromium-browser
-xi setup-xorg-base i3wm startx "ttf-dejavu ttf-font-awesome ttf-ancient-fonts xf86-video-fbdev rxvt-unicode"
+xi setup-xorg-base i3wm startx "ttf-dejavu ttf-font-awesome xf86-video-fbdev rxvt-unicode"
 
 pkgi vscode
 pkgi chrome chromium
