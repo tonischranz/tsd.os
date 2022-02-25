@@ -67,11 +67,11 @@ if [ "$color_prompt" = yes ]; then
     PS1+=$'\[\e[32m\]\h '
 #    PS1+=$'\[\e[31m\]: '
     PS1+=$'\[\e[33m\]\w'
-hash git && PS1+=$'\[\e[94m\]$(__git_ps1)'
+hash git && hash __git_ps1 && PS1+=$'\[\e[94m\]$(__git_ps1)'
     PS1+=$'\[\e[36m\] \$'
     PS1+=$'\[\e[0m\] '
 else
-    hash git && PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1)\$' ||  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$' 
+    hash git && hash __git_ps1 && PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1)\$' ||  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$' 
 fi
 unalias hash
 unset color_prompt force_color_prompt
