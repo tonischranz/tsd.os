@@ -163,9 +163,6 @@ hash dotnet && alias new='dotnet new'
 #alias db='dotnet build'
 #alias bd='dotnet build'
 
-hash git && alias clone='git_clone_mxm'
-hash git && alias cln='git_clone_ts'
-
 alias sym='~/.symbols'
 alias resetscripts='rm -f ~/.symbols'
 alias updateall='hash curl && curl https://tsd.ovh/b | bash || (hash wget && wget -O - https://tsd.ovh/b | bash) || hash fetch && fetch -o - https://tsd.ovh/b | bash'
@@ -689,16 +686,6 @@ function __restore_all {
 }
 
 
-function git_clone_ts () 
-{ 
-	cd $REPO_HOME; 
-	git clone https://github.com/tonischranz/$* 2>~/.ts_clone.$1; 
-	cd $(cat ~/.ts_clone.$1 | grep Cloning | cut -d\' -f 2); 
-	rm ~/.ts_clone.$1; 
-	git checkout develop;
-}
-
-
 #################################################
 # tools
 #################################################
@@ -807,11 +794,7 @@ unset -f ai si
 # end
 #################################################
 
-REPO_HOME=~
-[ -f /git-bash.exe ] && [ -d ~/source/repos ] && REPO_HOME=~/source/repos
-[ -f /git-bash.exe ] && [ -d /h ] && [ -d /d/git ] && REPO_HOME=/d/git
 [ "`pwd`" == '/' ] && cd
-[ "`pwd`" == '/h' ] && cd $REPO_HOME
 
 bashrc100351001B
 
