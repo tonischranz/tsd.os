@@ -672,7 +672,7 @@ function google () { https "google.com/?q=$*"; }
 	hash $3 || ! hash $1 || ! hash sudo || alias $3="echo installing $3 with $1 && sudo $1 $2 $pkg && unalias $3; $3"; 
 }
 
-function aai () { xi apk "add -y" $*; }
+function aai () { xi apk "add" $*; }
 function ai () { xi apt "install -y" $*; }
 function si () { xi snap "install -y" $*; }
 function pkgi () { xi pkg "install -y" $*; }
