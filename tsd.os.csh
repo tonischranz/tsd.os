@@ -20,7 +20,8 @@ echo
        tsd.os install       - install base pkgs\
        tsd.os ui            - install xorg,firefox\
        tsd.os cc            - install clang/headers/libs\
-       tsd.os <dev>         - create live usb"; echo
+       tsd.os <dev>         - create live usb
+	   tsd.os leg <dev>     - create legacy usb"; echo
 
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
@@ -51,6 +52,10 @@ cp /root/openssl.cnf /etc/ssl
 rm /root/openssl.cnf
 pkg install -y curl
 tsd.os install
+
+else if ("$1" == leg) then
+	mode=legacy
+	shift
 
 else
 [ -n "$1" ] || exit
@@ -153,16 +158,17 @@ hostname `gpart show -l | nawk '/tsd\..+-/{ name=substr($4, 5) } END { print nam
 
 bsdinstall keymap
 bsdinstall hostname
-bsdinstall netconfig
 
 dialog --backtitle "tsd.os - "`hostname` --title "Welcome" --extra-button --extra-label "Install FreeBSD" --ok-label "Desktop" --cancel-label "Shell" --yesno "What you want to do?" 0 0
 
 case $? in
 $DIALOG_OK)	# tsd.os Desktop
+	bsdinstall netconfig
 	tsd.os live
 	tsd.os ui
 	;;
-$DIALOG_CANCEL)	# tsd.os Shell	
+$DIALOG_CANCEL)	# tsd.os Shell
+	bsdinstall netconfig	
 	tsd.os live
 	;;
 $DIALOG_EXTRA)	# Install FreeBSD
@@ -177,7 +183,6 @@ tsd.os/sbin/tsd.os | gzip > tsd.os/usr/share/man/man1/tsd.os.1.gz
 
 mkdir tsd.os/home
 mkdir tsd.os/usr/ports
-
 echo creating efi boot img
 dd if=/dev/zero of=efiboot.img bs=4k count=10240
 set tsd_mde=`mdconfig -a -t vnode -f efiboot.img | cut -d " " -f1` 
@@ -193,7 +198,7 @@ umount efi
 mdconfig -d -u $tsd_md
 mdconfig -d -u $tsd_mde
 
-echo building iso
+if ("$mode" == legacy) then
 makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o bootimage='i386;/boot/cdboot' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os
 
 echo inject bootcode
@@ -223,5 +228,11 @@ dd if=hybrid.img of=tsd.os.iso bs=32k count=1 conv=notrunc
 
 echo flashing iso to device
 dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
+
+else
+
+echo building iso and flashing it to device
+makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
+endif
 echo finished
 endif
