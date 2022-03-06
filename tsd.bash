@@ -59,6 +59,7 @@ shopt -s globstar
 
 alias hash='hash 2>/dev/null'
 color_prompt=yes
+[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}'
@@ -121,7 +122,6 @@ source /usr/local/share/bash-completion/bash_completion.sh
 complete -cf sudo
 
 [ -f /usr/local/share/git-core/contrib/completion/git-completion.bash ] && . /usr/local/share/git-core/contrib/completion/git-completion.bash
-[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
 [ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
 
 #################################################
