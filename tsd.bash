@@ -132,6 +132,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias cl='clear'
 
+alias sudo='sudo '
+
 hash git && alias ga='git add'
 hash git && alias gb='git branch'
 hash git && alias gc='git commit'
