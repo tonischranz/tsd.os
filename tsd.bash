@@ -783,7 +783,7 @@ pkgi fontforge
 pkgi pcmanfm "pcmanfm-qt file-roller"
 pkgi pitivi
 pkgi openshot
-pkgi shotcutter
+pkgi shotcut
 pkgi vid.stab
 pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu symbola zh-CNS11643-font"
 pkgi rdesktop
