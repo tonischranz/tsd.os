@@ -55,10 +55,12 @@ pkg install -y curl
 tsd.os install
 
 else if ("$1" == leg) then
+	echo legacy boot mode
 	set mode=legacy
 	shift
 
 else
+echo creating bootable usb
 [ -n "$1" ] || exit
 [ -w /dev/$1 ] || echo device $1 must exist and be writable && exit
 
@@ -196,10 +198,18 @@ cp mnt/boot/loader.efi efi/EFI/BOOT/BOOTX64.efi
 echo copied loader.efi
 umount mnt
 umount efi 
+echo unmounted
 mdconfig -d -u $tsd_md
 mdconfig -d -u $tsd_mde
+echo mount devices deleted
 
-if ("$mode" == legacy) then
+if ("$mode" == uefi) then
+
+echo building iso and flashing it to device
+makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
+
+else if ("$mode" == legacy) then
+echo building iso
 makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o bootimage='i386;/boot/cdboot' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os
 
 echo inject bootcode
@@ -223,17 +233,12 @@ mkimg -s gpt \
     -o hybrid.img
 
 "hybridcode100351001b"
-	
-dd if=hybrid.img of=tsd.os.iso bs=32k count=1 conv=notrunc
 
+dd if=hybrid.img of=tsd.os.iso bs=32k count=1 conv=notrunc
 
 echo flashing iso to device
 dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
 
-else
-
-echo building iso and flashing it to device
-makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
 endif
 echo finished
 endif
