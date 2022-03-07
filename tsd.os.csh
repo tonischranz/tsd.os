@@ -5,6 +5,7 @@ hash tsd.os || (hash fetch && mkdir -p ~/bin && fetch -o ~/bin/tsd.os https://ts
 set fbsd_root=http://ftp.ch.freebsd.org/pub/FreeBSD/releases
 set fbsd_arch=amd64
 set fbsd_rel="13.0"
+set mode=uefi
 
 echo "                                                                  ////////////////"
 echo "  FreeBSD live-system by tsd.                            ///////////////////////////"
@@ -54,7 +55,7 @@ pkg install -y curl
 tsd.os install
 
 else if ("$1" == leg) then
-	mode=legacy
+	set mode=legacy
 	shift
 
 else
