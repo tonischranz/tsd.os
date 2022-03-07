@@ -20,8 +20,8 @@ echo
        tsd.os install       - install base pkgs\
        tsd.os ui            - install xorg,firefox\
        tsd.os cc            - install clang/headers/libs\
-       tsd.os <dev>         - create live usb
-	   tsd.os leg <dev>     - create legacy usb"; echo
+       tsd.os <dev>         - create live usb\
+       tsd.os leg <dev>     - create legacy usb"; echo
 
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
