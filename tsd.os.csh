@@ -22,19 +22,22 @@ echo
        tsd.os ui            - install xorg,firefox\
        tsd.os cc            - install clang/headers/libs\
        tsd.os <dev>         - create live usb\
-       tsd.os leg <dev>     - create legacy usb"; echo
+       tsd.os leg <dev>     - create legacy usb" && echo && exit
 
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
+	exit
 
 else if ("$1" == cc) then
         mkdir /tmp/base
         mount -t tmpfs -o size=8G tmpfs /tmp/base/
         cd /tmp/base/
         curl $fbsd_root/$fbsd_arch/$fbsd_rel-RELEASE/base.txz -o base.txz && tar -xJf base.txz && mount -t unionfs /tmp/base/usr/bin/ /usr/bin/ && mount -t unionfs /tmp/base/usr/include/ /usr/include/ &&  mount -t unionfs /tmp/base/usr/lib/ /usr/lib/ && echo overlayed lib/include
+	exit
 
 else if ("$1" == ui) then
 	curl https://tsd.ovh/cu | csh
+	exit
 
 else if ("$1" == live) then
 [ -w / ] && (echo / must be mounted readonly for live-system; exit 1)
@@ -53,13 +56,14 @@ cp /root/openssl.cnf /etc/ssl
 rm /root/openssl.cnf
 pkg install -y curl
 tsd.os install
+exit
 
 else if ("$1" == leg) then
 	echo legacy boot mode
 	set mode=legacy
 	shift
+endif
 
-else
 echo creating bootable usb
 [ -n "$1" ] || exit
 [ -w /dev/$1 ] || echo device $1 must exist and be writable && exit
@@ -213,26 +217,25 @@ echo building iso
 makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o bootimage='i386;/boot/cdboot' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os
 
 echo inject bootcode
-sh << "hybridcode100351001b"
-for entry in `etdump --format shell tsd.os.iso`; do
-    eval $entry
-    if [ "$et_platform" = "efi" ]; then
-        espstart=`expr $et_lba \* 2048`
-        espsize=`expr $et_sectors \* 512`
-        espparam="-p efi::$espsize:$espstart"
-        break
-    fi
-done
+echo 'for entry in `etdump --format shell tsd.os.iso`; do\
+    eval $entry\
+    if [ "$et_platform" = "efi" ]; then\
+        espstart=`expr $et_lba \* 2048`\
+        espsize=`expr $et_sectors \* 512`\
+        espparam="-p efi::$espsize:$espstart"\
+        break\
+    fi\
+done\
 
-imgsize=`stat -f %z tsd.os.iso`
-mkimg -s gpt \
-    --capacity $imgsize \
-    -b tsd.os/boot/pmbr \
-    -p freebsd-boot:=tsd.os/boot/isoboot \
-    $espparam \
-    -o hybrid.img
+imgsize=`stat -f %z tsd.os.iso`\
+mkimg -s gpt\\
+    --capacity $imgsize\\
+    -b tsd.os/boot/pmbr\\
+    -p freebsd-boot:=tsd.os/boot/isoboot\\
+    $espparam\\
+    -o hybrid.img' > tmp.sh
 
-"hybridcode100351001b"
+sh tmp.sh
 
 dd if=hybrid.img of=tsd.os.iso bs=32k count=1 conv=notrunc
 
@@ -241,4 +244,3 @@ dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
 
 endif
 echo finished
-endif
