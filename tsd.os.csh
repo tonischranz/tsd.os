@@ -226,7 +226,6 @@ echo 'for entry in `etdump --format shell tsd.os.iso`; do\
         break\
     fi\
 done\
-
 imgsize=`stat -f %z tsd.os.iso`\
 mkimg -s gpt\\
     --capacity $imgsize\\
