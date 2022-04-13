@@ -714,6 +714,8 @@ ai npm
 ai ranger
 ai mc
 ai htop
+ai make
+ai gcc
 
 pkgi curl
 pkgi git
