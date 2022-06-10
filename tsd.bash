@@ -733,7 +733,7 @@ if [ -f /git-bash.exe ]; then
 extension_dir=\"ext\"
 extension=openssl
 zend_extension=xdebug" > .php/php.ini && unalias php && PATH=$PATH:~/.php && php'
-    hash php7 || alias php7='curl https://windows.php.net/downloads/releases/latest/php-7.4-nts-Win32-vc15-x64-latest.zip -o ~/.php7.zip && unzip ~/.php7.zip -d ~/.php7 && rm ~/.php7.zip && cp ~/.php7/php.exe ~/.php7/php7.exe && curl https://xdebug.org/files/php_xdebug-3.1.5-7.4-vc15-nts-x86_64.dll -o ~/.php7/ext/php_xdebug.dll &&  echo "[PHP]
+    hash php7 || alias php7='curl https://windows.php.net/downloads/releases/latest/php-7.4-nts-Win32-vc15-x64-latest.zip -o ~/.php7.zip && unzip ~/.php7.zip -d ~/.php7 && rm ~/.php7.zip && mv ~/.php7/php.exe ~/.php7/php7.exe && curl https://xdebug.org/files/php_xdebug-3.1.5-7.4-vc15-nts-x86_64.dll -o ~/.php7/ext/php_xdebug.dll &&  echo "[PHP]
 extension_dir=\"ext\"
 extension=openssl
 zend_extension=xdebug" > .php7/php.ini && unalias php7 && PATH=$PATH:~/.php7 && php7'
