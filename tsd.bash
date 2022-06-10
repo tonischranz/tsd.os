@@ -219,7 +219,8 @@ unalias hash
 
 ! hash 2>/dev/null dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
 ! hash 2>/dev/null dotnet && [  -d ~/AppData/Local/Microsoft/dotnet ] &&PATH=$PATH:~/AppData/Local/Microsoft/dotnet
-! hash 2>/dev/null php && [  -d ~/.php ] && PATH=$PATH:~/.php 
+! hash 2>/dev/null php && [  -d ~/.php ] && PATH=$PATH:~/.php
+! hash 2>/dev/null php7 && [  -d ~/.php7 ] && PATH=$PATH:~/.php7
 
 . ~/.bash_aliases
 
@@ -728,7 +729,14 @@ pkgi mc
 pkgi htop
 
 if [ -f /git-bash.exe ]; then
-	hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-8.1-nts-Win32-vs16-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && curl https://xdebug.org/files/php_xdebug-3.1.2-8.1-vs16-nts-x86_64.dll -o ~/.php/ext/php_xdebug.dll && unalias php && PATH=$PATH:~/.php && php'
+    hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-8.1-nts-Win32-vs16-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && curl https://xdebug.org/files/php_xdebug-3.1.2-8.1-vs16-nts-x86_64.dll -o ~/.php/ext/php_xdebug.dll && echo "[PHP]
+extension_dir=\"ext\"
+extension=openssl
+zend_extension=xdebug" > .php/php.ini && unalias php && PATH=$PATH:~/.php && php'
+    hash php7 || alias php7='curl https://windows.php.net/downloads/releases/latest/php-7.4-nts-Win32-vc15-x64-latest.zip -o ~/.php7.zip && unzip ~/.php7.zip -d ~/.php7 && rm ~/.php7.zip && cp ~/.php7/php.exe ~/.php7/php7.exe && curl https://xdebug.org/files/php_xdebug-3.1.5-7.4-vc15-nts-x86_64.dll -o ~/.php7/ext/php_xdebug.dll &&  echo "[PHP]
+extension_dir=\"ext\"
+extension=openssl
+zend_extension=xdebug" > .php7/php.ini && unalias php7 && PATH=$PATH:~/.php7 && php7'
 	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.ps1 | powershell && unalias dotnet && PATH=$PATH:~/AppData/Local/Microsoft/dotnet && dotnet'
 elif hash curl; then
 	hash dotnet || alias dotnet='curl https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh | bash && unalias dotnet && PATH=$PATH:~/.dotnet && dotnet'
