@@ -795,7 +795,7 @@ pkgi pitivi
 pkgi openshot
 pkgi shotcut
 pkgi vid.stab
-pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu symbola zh-CNS11643-font"
+pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu symbola zh-CNS11643-font junicode"
 pkgi rdesktop
 pkgi freerdp
 pkgi xrdp
