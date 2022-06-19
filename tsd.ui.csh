@@ -27,5 +27,5 @@ pciconf -lv | grep -B3 display | grep 'Intel Corporation'\
 
 echo xorg i3 fonts tools
 pkg install -y xorg-minimal i3 i3status dmenu rxvt-unicode xterm setxkbmap
-pkg install -y noto-basic symbola dejavu zh-CNS11643-font
+pkg install -y noto-basic symbola dejavu zh-CNS11643-font junicode
 pkg install -y firefox feh
