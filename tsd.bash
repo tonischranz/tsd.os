@@ -546,6 +546,8 @@ mode "resize" {
 
 bindsym $mod+p mode "resize"
 
+bindsym $mod+l exec "i3lock -c 000000"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
