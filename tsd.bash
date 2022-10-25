@@ -566,7 +566,8 @@ bar {
         }
 }
 
-
+#exec --no-startup-id xauth remove :20 && xauth add :20 . `ssh freebsd@hub-tsd xauth list | grep unix:0 | cut -d " " -f5` && ssh -CN -L localhost:6020:localhost:6000 hub-tsd 
+#exec --no-startup-id sleep 2 && DISPLAY=:20 feh --no-fehbg --bg-center ~/a.png
 exec --no-startup-id . ~/.fehbg
 ' > ~/.config/i3/config
 
