@@ -592,6 +592,7 @@ cpu_usage {
 fi
 
 if hash 2>/dev/null mc;then
+[ -d ~/.config ] || mkdir ~/.config
 [ -d ~/.config/mc ] || mkdir ~/.config/mc
 [ -f ~/.config/mc/ini ] || echo '[Midnight-Commander]
 skin=nicedark
@@ -600,7 +601,7 @@ use_internal_edit=false
 fi
 
 if hash 2>/dev/null feh && hash 2>/dev/null i3;then
-[ -f /git-bash.exe ] || [ -f ~/.fehbg ] || echo '#!/bin/sh
+[ -f ~/.fehbg ] || echo '#!/bin/sh
 [ -f ~/.bg.png ] && feh --no-fehbg --bg-tile '~/.bg.png'
 [ -f ~/.bg.png ] || ([ -f ~/bg.jpeg ] && feh --no-fehbg --bg-tile '~/bg.jpeg')
 ' > ~/.fehbg
