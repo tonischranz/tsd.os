@@ -230,19 +230,7 @@ unalias hash
 
 if [ -f /git-bash.exe ]; then
 
-if [ -d /c/ProgramData/chocolatey/lib/dejavufonts ]; then
-	[ -f ~/.minttyrc ] || echo "FontHeight=14
-Transparency=medium
-Scrollbar=none
-Font=DejaVu Sans Mono
-FontWeight=400
-FontIsBold=no
-BoldAsFont=no
-
-ThemeFile=toni
-" > ~/.minttyrc
-fi
-
+## Windows minttyrc
 [ -f ~/.minttyrc ] || echo "FontHeight=14
 Transparency=medium
 Scrollbar=none
@@ -253,6 +241,7 @@ BoldAsFont=no
 ThemeFile=toni
 " > ~/.minttyrc
 
+## Windows mintty theme
 [ -d ~/.mintty/ ] || mkdir ~/.mintty
 [ -d ~/.mintty/themes/ ] || mkdir ~/.mintty/themes
 [ -f ~/.mintty/themes/toni ] || echo "
@@ -277,23 +266,7 @@ BoldWhite=          236, 240, 241
 White=              189, 195, 199
 " > ~/.mintty/themes/toni
 
-if [ "$USERNAME" == tschranz ]; then
-[ -f ~/.gitconfig ] || echo "[user]
-	email = toni@mxm.ch
-	name = Toni Schranz - Maxomedia AG
-[core]
-	editor = vim
-[merge]
-	tool = vimdiff
-" > ~/.gitconfig
-else
-[ -f ~/.gitconfig ] || echo "[core]
-	editor = vim
-[merge]
-	tool = vimdiff
-" > ~/.gitconfig
-fi
-
+## Windows vimrc
 ! [ -f ~/.vimrc ] && echo writing .vimrc && echo "
 syntax on
 
@@ -328,22 +301,7 @@ set wildmenu
 " > ~/.vimrc && echo written .vimrc
 fi
 
-if [ "$USERNAME" == toni ]; then
-[ -f ~/.gitconfig ] || echo "[user]
-	email = toni.schranz@gmail.com
-	name = Toni Schranz
-[core]
-	editor = vim
-[merge]
-	tool = vimdiff
-" > ~/.gitconfig
-else
-[ -f ~/.gitconfig ] || echo "[core]
-	editor = vim
-[merge]
-	tool = vimdiff
-" > ~/.gitconfig
-fi
+if hash 2>/dev/null vim;then
 
 ! [ -f ~/.vimrc ] && echo writing .vimrc && echo "
 syntax on
@@ -380,8 +338,10 @@ set secure
 set ex
 set wildmenu
 " > ~/.vimrc
+fi
 
-[ -f /git-bash.exe ] || [ -f ~/.Xdefaults ] || echo "
+if hash 2>/dev/null startx;then
+[ -f ~/.Xdefaults ] || echo "
 *background: #050505
 *foreground: #dddddd
 ! Black + DarkGrey
@@ -412,10 +372,12 @@ set wildmenu
 URxvt.termName: rxvt-unicode-256color
 URxvt.font: xft: DejaVu Sans Mono:size=12
 " > ~/.Xdefaults
+fi
 
-[ -f /git-bash.exe ] || [ -d ~/.config ] || mkdir ~/.config
-[ -f /git-bash.exe ] || [ -d ~/.config/i3 ] || mkdir ~/.config/i3
-[ -f /git-bash.exe ] || [ -f ~/.config/i3/config ] || echo $'
+if hash 2>/dev/null i3;then
+[ -d ~/.config ] || mkdir ~/.config
+[ -d ~/.config/i3 ] || mkdir ~/.config/i3
+[ -f ~/.config/i3/config ] || echo $'
 set $mod Mod4
 
 font pango:DejaVu Sans Mono 9
@@ -571,7 +533,7 @@ bar {
 exec --no-startup-id . ~/.fehbg
 ' > ~/.config/i3/config
 
-[ -f /git-bash.exe ] || [ -f ~/.i3status.conf ] || echo $'
+[ -f ~/.i3status.conf ] || echo $'
 general {
         colors = true
         interval = 1
@@ -627,17 +589,22 @@ cpu_usage {
         format = "%cpu0 %cpu1 %cpu2 %cpu3 %cpu4 %cpu5"
 }
 ' > ~/.i3status.conf
+fi
 
-[ -f /git-bash.exe ] || [ -d ~/.config/mc ] || mkdir ~/.config/mc
-[ -f /git-bash.exe ] || [ -f ~/.config/mc/ini ] || echo '[Midnight-Commander]
+if hash 2>/dev/null mc;then
+[ -d ~/.config/mc ] || mkdir ~/.config/mc
+[ -f ~/.config/mc/ini ] || echo '[Midnight-Commander]
 skin=nicedark
 use_internal_edit=false
 ' > ~/.config/mc/ini
+fi
 
+if hash 2>/dev/null feh && hash 2>/dev/null i3;then
 [ -f /git-bash.exe ] || [ -f ~/.fehbg ] || echo '#!/bin/sh
 [ -f ~/.bg.png ] && feh --no-fehbg --bg-tile '~/.bg.png'
 [ -f ~/.bg.png ] || ([ -f ~/bg.jpeg ] && feh --no-fehbg --bg-tile '~/bg.jpeg')
 ' > ~/.fehbg
+fi
 
 #################################################
 # shell scripts
@@ -815,10 +782,6 @@ unset -f ai si
 [ "`pwd`" == '/' ] && cd
 
 bashrc100351001B
-
-[ -f ~/.bg.png ] || hash curl && curl -o ~/.bg.png https://tsd.ovh/bp
-[ -f ~/.bg.png ] || hash wget && wget -O ~/.bg.png https://tsd.ovh/bp
-[ -f ~/.bg.png ] || hash fetch && fetch -o ~/.bg.png https://tsd.ovh/bp
 
 echo
 exec bash -ic "
