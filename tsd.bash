@@ -771,8 +771,6 @@ pkgi rdesktop
 pkgi freerdp
 pkgi xrdp
 
-[ "$TERM" == linux ] && ! ps u | [ `grep startx -c` -gt 1 ] && hash startx && startx
-
 unalias hash
 unset -f ai si
 
