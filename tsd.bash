@@ -700,7 +700,7 @@ pkgi mc
 pkgi htop
 
 if [ -f /git-bash.exe ]; then
-    hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-8.1-nts-Win32-vs16-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && curl https://xdebug.org/files/php_xdebug-3.1.2-8.1-vs16-nts-x86_64.dll -o ~/.php/ext/php_xdebug.dll && echo "[PHP]
+    hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-8.2-nts-Win32-vs16-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && curl https://xdebug.org/files/php_xdebug-3.2.0-8.2-vs16-nts-x86_64.dll -o ~/.php/ext/php_xdebug.dll && echo "[PHP]
 extension_dir=\"ext\"
 extension=openssl
 zend_extension=xdebug" > .php/php.ini && unalias php && PATH=$PATH:~/.php && php'
