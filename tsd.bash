@@ -671,7 +671,7 @@ aai curl
 aai git
 aai vim
 aai lynx
-aai php php81
+aai php php82
 aai npm
 aai ranger
 aai mc
@@ -693,7 +693,7 @@ pkgi curl
 pkgi git
 pkgi vim
 pkgi lynx
-pkgi php php81
+pkgi php php82
 pkgi npm
 pkgi ranger
 pkgi mc
