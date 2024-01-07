@@ -26,6 +26,9 @@ pciconf -lv | grep -B3 display | grep 'Intel Corporation'\
 && kldload i915kms
 
 echo xorg i3 fonts tools
-pkg install -y xorg-minimal i3 i3status dmenu rxvt-unicode xterm setxkbmap
-pkg install -y noto-basic symbola dejavu zh-CNS11643-font junicode
-pkg install -y firefox feh
+pkg install -y lxqt sddm xorg-minimal setxkbmap automount
+#pkg install -y xorg-minimal i3 i3status dmenu rxvt-unicode xterm setxkbmap
+pkg install -y symbola junicode zh-CNS11643-font
+#pkg install -y dejavu
+pkg install -y chromium
+#pkg install -y firefox feh
