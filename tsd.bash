@@ -136,7 +136,7 @@ alias cl='clear'
 
 alias sudo='sudo '
 
-hash git && alias ga='git add'
+hash git && alias ga='git add --patch'
 hash git && alias gb='git branch'
 hash git && alias gc='git commit'
 hash git && alias gd='git diff'
