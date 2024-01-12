@@ -689,6 +689,7 @@ ai mc
 ai htop
 ai make
 ai gcc
+ai gnome-tweaks
 
 pkgi curl
 pkgi git
