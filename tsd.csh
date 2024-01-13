@@ -57,7 +57,7 @@ ttyu3	"/usr/libexec/getty 3wire"	vt100	onifconsole secure\
 dcons	"/usr/libexec/getty std.9600"	vt100	off secure' > /etc/ttys
 
 
-pkg install -y vim mc
+pkg install -y vim mc elinks
 
 grep UTF-8 /etc/profile \
 || (echo Setting Language/charset in profile \
