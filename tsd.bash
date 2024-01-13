@@ -677,6 +677,7 @@ aai npm
 aai ranger
 aai mc
 aai htop
+aai elinks
 
 ai curl
 ai git
@@ -690,6 +691,7 @@ ai htop
 ai make
 ai gcc
 ai gnome-tweaks
+ai elinks
 
 pkgi curl
 pkgi git
@@ -700,6 +702,7 @@ pkgi npm
 pkgi ranger
 pkgi mc
 pkgi htop
+pkgi elinks
 
 if [ -f /git-bash.exe ]; then
     hash php || alias php='curl https://windows.php.net/downloads/releases/latest/php-8.2-nts-Win32-vs16-x64-latest.zip -o ~/.php.zip && unzip ~/.php.zip -d ~/.php && rm ~/.php.zip && curl https://xdebug.org/files/php_xdebug-3.2.0-8.2-vs16-nts-x86_64.dll -o ~/.php/ext/php_xdebug.dll && echo "[PHP]
