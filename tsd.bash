@@ -632,7 +632,7 @@ echo' > ~/.symbols
 alias hash='hash 2>/dev/null'
 
 ! hash start && hash xdg-open && function start () { xdg-open $*; }
-! hash open && hash open && function start () { open $*; }
+! hash start && hash open && function start () { open $*; }
 ! hash explorer && hash nautilus && function explorer () { nautilus $*; }
 
 hash start && function https () { start "https://$*"; }
@@ -672,7 +672,6 @@ function __restore_all {
 aai curl
 aai git
 aai vim
-aai lynx
 aai php php82
 aai npm
 aai ranger
@@ -683,10 +682,8 @@ aai elinks
 ai curl
 ai git
 ai vim
-ai lynx
 ai php php8.1
 ai npm
-ai ranger
 ai mc
 ai htop
 ai make
@@ -697,10 +694,8 @@ ai elinks
 pkgi curl
 pkgi git
 pkgi vim
-pkgi lynx
 pkgi php php82
 pkgi npm
-pkgi ranger
 pkgi mc
 pkgi htop
 pkgi elinks
@@ -764,18 +759,18 @@ pkgi inkscape
 pkgi librecad
 pkgi lbreoffice-calc
 pkgi bhyve
-pkgi docker
-pkgi virtualbox virtualbox-ose
+#pkgi docker
+#pkgi virtualbox virtualbox-ose
 pkgi fontforge
-pkgi pcmanfm "pcmanfm-qt file-roller"
+#pkgi pcmanfm "pcmanfm-qt file-roller"
 pkgi pitivi
 pkgi openshot
 pkgi shotcut
 pkgi vid.stab
 pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu symbola zh-CNS11643-font junicode"
-pkgi rdesktop
-pkgi freerdp
-pkgi xrdp
+#pkgi rdesktop
+#pkgi freerdp
+#pkgi xrdp
 
 unalias hash
 unset -f ai si
