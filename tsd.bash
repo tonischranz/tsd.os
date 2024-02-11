@@ -138,7 +138,7 @@ alias sudo='sudo '
 
 hash git && alias ga='git add --patch'
 hash git && alias gb='git branch'
-hash git && alias gc='git clone http'
+#hash git && alias gc='git clone'
 hash git && alias gd='git diff'
 hash git && alias gf='git fetch'
 hash git && alias gg='git log'
