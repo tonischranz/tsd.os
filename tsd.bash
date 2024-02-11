@@ -171,7 +171,7 @@ hash dotnet && alias new='dotnet new'
 
 alias sym='~/.symbols'
 alias resetscripts='rm -f ~/.symbols'
-alias updateall='hash curl && curl https://tsd.ovh/b | bash || (hash wget && wget -O - https://tsd.ovh/b | bash) || hash fetch && fetch -o - https://tsd.ovh/b | bash'
+alias updateall='curl https://tsd.ovh/b | bash'
 alias resetfiles='resetscripts; rm -f ~/.bash_aliases ~/.gitconfig ~/.vimrc && [ -f ~/.minttyrc ] && rm -f ~/.minttyrc'
 alias resetconfig='resetfiles; rm -f ~/.x ~/.Xdefaults ~/.fehbg ~/.config/i3/config ~/.i3status.conf ~/.config/mc/ini; updateall'
 alias leave='resetfiles; __restore_all; [ -f ~/.viminfo ] && rm ~/.viminfo; exit'
