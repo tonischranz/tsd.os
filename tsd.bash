@@ -727,15 +727,12 @@ si gimp
 si inkscape
 si chromium
 
-
-
 ai feh
 ai firefox
 ai gimp
 ai inkscape
 ai librecad
 ai lbreoffice-calc
-ai virtualbox virtualbox-qt
 ai g213-led g810-led
 ai fontforge
 ai startx "xinit i3 xserver-xorg fonts-dejavu ttf-font-awesome ttf-ancient-fonts fonts-cns11643"
@@ -759,18 +756,12 @@ pkgi inkscape
 pkgi librecad
 pkgi lbreoffice-calc
 pkgi bhyve
-#pkgi docker
-#pkgi virtualbox virtualbox-ose
 pkgi fontforge
-#pkgi pcmanfm "pcmanfm-qt file-roller"
 pkgi pitivi
 pkgi openshot
 pkgi shotcut
 pkgi vid.stab
 pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu symbola zh-CNS11643-font junicode"
-#pkgi rdesktop
-#pkgi freerdp
-#pkgi xrdp
 
 unalias hash
 unset -f ai si
