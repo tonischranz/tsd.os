@@ -138,7 +138,7 @@ alias sudo='sudo '
 
 hash git && alias ga='git add --patch'
 hash git && alias gb='git branch'
-hash git && alias gc='git commit'
+#hash git && alias gc='git clone'
 hash git && alias gd='git diff'
 hash git && alias gf='git fetch'
 hash git && alias gg='git log'
@@ -631,12 +631,13 @@ echo' > ~/.symbols
 
 alias hash='hash 2>/dev/null'
 
-! hash start && hash firefox && function start () { firefox $*; }
-! hash start && hash chromium && function start () { chromium $*; }
+! hash start && hash xdg-open && function start () { xdg-open $*; }
+! hash open && hash open && function start () { open $*; }
 ! hash explorer && hash nautilus && function explorer () { nautilus $*; }
 
-function https () { start "https://$*"; }
-function google () { https "google.com/?q=$*"; }
+hash start && function https () { start "https://$*"; }
+hash https && function google () { https "google.com/?q=$*"; }
+hash git && function clone () { git clone https://github.com/$*; }
 
 [ `id -u` -gt 0 ] || function xi ()
 {
