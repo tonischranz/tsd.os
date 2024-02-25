@@ -6,6 +6,7 @@ set fbsd_root=http://ftp.ch.freebsd.org/pub/FreeBSD/releases
 set fbsd_arch=amd64
 set fbsd_rel="13.0"
 set mode=uefi
+set pwd=`pwd`
 
 echo "                                                                  ////////////////"
 echo "  FreeBSD live-system by tsd.                            ///////////////////////////"
@@ -58,15 +59,23 @@ pkg install -y curl
 tsd.os install
 exit
 
+else if ("$1" == img) then
+	echo generate image
+	set img=true
+	shift
+
+
 else if ("$1" == leg) then
 	echo legacy boot mode
 	set mode=legacy
 	shift
 endif
 
-echo creating bootable usb
-[ -n "$1" ] || exit
-[ -w /dev/$1 ] || echo device $1 must exist and be writable && exit
+
+
+echo creating bootable usb or iso image
+[ $img ] || [ -n "$1" ] || exit
+[ $img ] || [ -w /dev/$1 ] || echo device $1 must exist and be writable && exit
 
 set tsd_dir=`mktemp -d`
 mount -t tmpfs -o size=4G tmpfs $tsd_dir
@@ -237,9 +246,10 @@ mkimg -s gpt\\
 sh tmp.sh
 
 dd if=hybrid.img of=tsd.os.iso bs=32k count=1 conv=notrunc
-
-echo flashing iso to device
-dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
-
 endif
+
+[ $img ] || echo flashing iso to device
+[ $img ] || dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
+[ $img ] && echo copy iso && cp tsd.os.iso $pwd
+
 echo finished
