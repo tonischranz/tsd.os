@@ -5,7 +5,7 @@
 # author: Toni Schranz          |
 # ----------------------------- /
 
-# hash tsd.os || (hash fetch && mkdir -p ~/bin && fetch -o ~/bin/tsd.os https://tsd.ovh/os && chmod +x ~/bin/tsd.os)
+# fetch https://tsd.ovh/os && chmod +x os && ./os
 # set fbsd_root=https://download.freebsd.org/ftp/releases
 
 set fbsd_root=http://ftp.ch.freebsd.org/pub/FreeBSD/releases
