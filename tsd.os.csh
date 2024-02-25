@@ -1,10 +1,16 @@
 #!/bin/csh
-hash tsd.os || (hash fetch && mkdir -p ~/bin && fetch -o ~/bin/tsd.os https://tsd.ovh/os && chmod +x ~/bin/tsd.os)
 
-#set fbsd_root=https://download.freebsd.org/ftp/releases
+### --------------------------- /
+##  tsd.os.csh                  |
+# author: Toni Schranz          |
+# ----------------------------- /
+
+# hash tsd.os || (hash fetch && mkdir -p ~/bin && fetch -o ~/bin/tsd.os https://tsd.ovh/os && chmod +x ~/bin/tsd.os)
+# set fbsd_root=https://download.freebsd.org/ftp/releases
+
 set fbsd_root=http://ftp.ch.freebsd.org/pub/FreeBSD/releases
 set fbsd_arch=amd64
-set fbsd_rel="13.0"
+set fbsd_rel="14.0"
 set mode=uefi
 set pwd=`pwd`
 
