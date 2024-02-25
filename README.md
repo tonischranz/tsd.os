@@ -3,7 +3,7 @@
 
 ## csh
 ```
-hash tsd.os || fetch -o - https://tsd.ovh/os | csh
+fetch https://tsd.ovh/os && chmod +x os && ./os
 ```
 
 ```
