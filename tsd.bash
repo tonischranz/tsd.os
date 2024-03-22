@@ -690,7 +690,7 @@ ai make
 ai gcc
 ai gnome-tweaks
 ai elinks
-ai snap squashfuse fuse snapd 
+ai snap "squashfuse fuse snapd" 
 
 pkgi curl
 pkgi git
