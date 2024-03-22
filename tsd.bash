@@ -653,7 +653,7 @@ hash git && function clone () { git clone https://github.com/$*; }
 
 function aai () { xi apk "add" $*; }
 function ai () { xi apt "install -y" $*; }
-function si () { xi snap "install -y" $*; }
+function si () { xi snap "install" $*; }
 function pkgi () { xi pkg "install -y" $*; }
 
 function __restore_all {
@@ -682,7 +682,7 @@ aai elinks
 ai curl
 ai git
 ai vim
-ai php php8.1
+ai php
 ai npm
 ai mc
 ai htop
@@ -690,6 +690,7 @@ ai make
 ai gcc
 ai gnome-tweaks
 ai elinks
+ai snap squashfuse fuse snapd 
 
 pkgi curl
 pkgi git
