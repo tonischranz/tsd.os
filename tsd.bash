@@ -690,7 +690,7 @@ ai make
 ai gcc
 ai gnome-tweaks
 ai elinks
-ai snap "squashfuse fuse snapd" 
+xi apt "install -y" snap "squashfuse fuse snapd" 
 
 pkgi curl
 pkgi git
