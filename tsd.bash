@@ -679,6 +679,8 @@ aai mc
 aai htop
 aai elinks
 
+si docker
+
 ai curl
 ai git
 ai vim
@@ -691,6 +693,7 @@ ai gcc
 ai gnome-tweaks
 ai elinks
 xi apt "install -y" snap "squashfuse fuse snapd" 
+xi apt "install -y" docker docker.io
 
 pkgi curl
 pkgi git
