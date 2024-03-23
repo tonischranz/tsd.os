@@ -654,7 +654,7 @@ function pkgi () { xi pkg "install -y" $*; }
 function leave () 
 {
 	for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; 
- 		do rm -f \$file && [ -f \$file.orig ] && echo restoring \$file && mv \$file.orig $file; 
+ 		do rm -f $file && [ -f $file.orig ] && echo restoring $file && mv $file.orig $file; 
    	done
 }
 
