@@ -767,7 +767,7 @@ pkgi vid.stab
 pkgi startx "xorg-minimal i3 dmenu i3status i3lock rxvt-unicode feh firefox dejavu symbola zh-CNS11643-font junicode"
 
 unalias hash
-unset -f ai si
+unset -f ai si pkgi aai xi
 
 #################################################
 # end
