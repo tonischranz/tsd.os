@@ -170,7 +170,7 @@ hash dotnet && alias new='dotnet new'
 
 alias sym='~/.symbols'
 alias updateall='mv ~/.bashrc ~/.bashrc.old; rm ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols && curl https://tsd.ovh/b | bash; exit'
-alias leave='for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; do rm $file; [ -f $file.orig ] && echo restoring $file && mv $file.orig $file]; done; exit'
+alias leave='for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; do rm $file; [ -f $file.orig ] && echo restoring $file && mv $file.orig $file; done; exit'
 
 hash librecad && alias cad='librecad'
 hash virtualbox && alias vbox='virtualbox'
