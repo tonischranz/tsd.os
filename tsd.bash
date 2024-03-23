@@ -728,7 +728,10 @@ si gimp
 si inkscape
 si chromium
 
-ai feh
+if hash dpkg && hash apt && hash curl && hash sudo; then
+	hash code || alias code='curl -L "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-`dpkg --print-architecture`" -o code.deb && sudo apt install ./code.deb && rm code.deb && code'
+fi
+
 ai firefox
 ai gimp
 ai inkscape
