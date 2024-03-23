@@ -5,7 +5,7 @@ echo
 echo creating backup files
 
 for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; 
-  do [ -f $file ] && ! [ -f $file.orig ] && echo backing up $file && mv $file $file.orig ]; 
+  do [ -f $file ] && ! [ -f $file.orig ] && echo backing up $file && mv $file $file.orig; 
 done
 
 echo writing .bashrc
