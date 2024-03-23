@@ -656,6 +656,7 @@ function updateall ()
  	rm -f ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols
   	curl https://tsd.ovh/b | bash 
    	[ -f ~/.bashrc ] || mv -f ~/.bashrc.old ~/.bashrc
+    	rm -f ~/.bashrc.old
 }
 
 function leave () 
