@@ -782,9 +782,9 @@ exec bash -ic "
 echo
 echo differences
 echo
-echo .bashrc && [ -f ~/.bashrc.orig ] && diff ~/.bashrc.orig ~/.bashrc && rm -f ~/.bashrc.orig
-echo .vimrc && [ -f ~/.vimrc.orig ] && diff ~/.vimrc.orig ~/.vimrc && rm -f ~/.vimrc.orig
-echo .bash_aliases && [ -f ~/.bash_aliases.orig ] && diff ~/.bash_aliases.orig ~/.bash_aliases && rm -f ~/.bash_aliases.orig
-echo .minttyrc && [ -f ~/.minttyrc.orig ] && diff ~/.minttyrc.orig ~/.minttyrc &&  rm -f ~/.minttyrc.orig
-[ -f ~/.symbols.orig ] && diff ~/.symbols.orig ~/.symbols && rm -f ~/.symbols.orig
+echo .bashrc && [ -f ~/.bashrc.orig ] && diff ~/.bashrc.orig ~/.bashrc
+echo .vimrc && [ -f ~/.vimrc.orig ] && diff ~/.vimrc.orig ~/.vimrc
+echo .bash_aliases && [ -f ~/.bash_aliases.orig ] && diff ~/.bash_aliases.orig ~/.bash_aliases
+echo .minttyrc && [ -f ~/.minttyrc.orig ] && diff ~/.minttyrc.orig ~/.minttyrc
+[ -f ~/.symbols.orig ] && diff ~/.symbols.orig ~/.symbols
 "
