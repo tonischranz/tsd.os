@@ -648,7 +648,7 @@ hash git && function clone () { git clone https://github.com/$*; }
 [ `id -u` -gt 0 ] && function xi () 
 {
 	pkg=$4; [ -z "$pkg" ] && pkg=$3; 
-	hash $3 || ! hash $1 || ! hash sudo || alias $3="echo installing $3 with $1 && sudo $1 $2 $pkg && unalias $3; $3"; 
+	hash $3 || ! hash $1 || ! hash sudo || alias $3="echo installing $pkg with $1 && sudo $1 $2 $pkg && unalias $3; $3"; 
 }
 
 function aai () { xi apk "add" $*; }
