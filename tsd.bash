@@ -3,11 +3,10 @@
 echo
 echo
 echo creating backup files
-[ -f ~/.bashrc ] && ! [ -f ~/.bashrc.orig ] && mv ~/.bashrc ~/.bashrc.orig
-[ -f ~/.vimrc ] && ! [ -f ~/.vimrc.orig ] && mv ~/.vimrc ~/.vimrc.orig
-[ -f ~/.bash_aliases ] && ! [ -f ~/.bash_aliases.orig ] && mv ~/.bash_aliases ~/.bash_aliases.orig
-[ -f ~/.minttyrc ] && ! [ -f ~/.minttyrc.orig ] && mv ~/.minttyrc ~/.minttyrc.orig
-[ -f ~/.symbols ] && ! [ -f ~/.symbols.orig ] && mv ~/.symbols ~/.symbols.orig
+
+for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; 
+  do [ -f $file ] && ! [ -f $file.orig ] && echo backing up $file && mv $file $file.orig ]; 
+done
 
 echo writing .bashrc
 cat > ~/.bashrc << "bashrc100351001B"
@@ -170,11 +169,8 @@ hash dotnet && alias new='dotnet new'
 #alias bd='dotnet build'
 
 alias sym='~/.symbols'
-alias resetscripts='rm -f ~/.symbols'
-alias updateall='curl https://tsd.ovh/b | bash'
-alias resetfiles='resetscripts; rm -f ~/.bash_aliases ~/.gitconfig ~/.vimrc && [ -f ~/.minttyrc ] && rm -f ~/.minttyrc'
-alias resetconfig='resetfiles; rm -f ~/.x ~/.Xdefaults ~/.fehbg ~/.config/i3/config ~/.i3status.conf ~/.config/mc/ini; updateall'
-alias leave='resetfiles; __restore_all; [ -f ~/.viminfo ] && rm ~/.viminfo; exit'
+alias updateall='mv ~/.bashrc ~/.bashrc.old; rm ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols && curl https://tsd.ovh/b | bash; exit'
+alias leave='for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; do rm $file; [ -f $file.orig ] && echo restoring $file && mv $file.orig $file]; done; exit'
 
 hash librecad && alias cad='librecad'
 hash virtualbox && alias vbox='virtualbox'
@@ -656,13 +652,13 @@ function ai () { xi apt "install -y" $*; }
 function si () { xi snap install $*; }
 function pkgi () { xi pkg "install -y" $*; }
 
-function __restore_all {
-	[ -f ~/.bashrc.orig ] && [ -f ~/.bashrc ] && mv -b ~/.bashrc ~/.bashrc.bkp && mv ~/.bashrc.orig ~/.bashrc
-	[ -f ~/.vimrc.orig ] && ! [ -f ~/.vimrc ] && mv ~/.vimrc.orig ~/.vimrc
-	[ -f ~/.bash_aliases.orig ] && ! [ -f ~/.bash_aliases ] && mv ~/.bash_aliases.orig ~/.bash_aliases
-	[ -f ~/.minttyrc.orig ] && ! [ -f ~/.minttyrc ] && mv ~/.minttyrc.orig ~/.minttyrc
-	[ -f ~/.symbols.orig ] && ! [ -f ~/.symbols ] && mv ~/.symbols.orig ~/.symbols
-}
+# function __restore_all {
+#	[ -f ~/.bashrc.orig ] && [ -f ~/.bashrc ] && mv -b ~/.bashrc ~/.bashrc.bkp && mv ~/.bashrc.orig ~/.bashrc
+#	[ -f ~/.vimrc.orig ] && ! [ -f ~/.vimrc ] && mv ~/.vimrc.orig ~/.vimrc
+#	[ -f ~/.bash_aliases.orig ] && ! [ -f ~/.bash_aliases ] && mv ~/.bash_aliases.orig ~/.bash_aliases
+#	[ -f ~/.minttyrc.orig ] && ! [ -f ~/.minttyrc ] && mv ~/.minttyrc.orig ~/.minttyrc
+#	[ -f ~/.symbols.orig ] && ! [ -f ~/.symbols ] && mv ~/.symbols.orig ~/.symbols
+# }
 
 
 #################################################
