@@ -170,7 +170,6 @@ hash dotnet && alias new='dotnet new'
 
 alias sym='~/.symbols'
 alias updateall='mv ~/.bashrc ~/.bashrc.old; rm -f ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols && curl https://tsd.ovh/b | bash'
-alias leave='for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; do rm -f $file && [ -f $file.orig ] && echo restoring $file && mv $file.orig $file; done'
 
 hash librecad && alias cad='librecad'
 hash virtualbox && alias vbox='virtualbox'
@@ -652,14 +651,12 @@ function ai () { xi apt "install -y" $*; }
 function si () { xi snap install $*; }
 function pkgi () { xi pkg "install -y" $*; }
 
-# function __restore_all {
-#	[ -f ~/.bashrc.orig ] && [ -f ~/.bashrc ] && mv -b ~/.bashrc ~/.bashrc.bkp && mv ~/.bashrc.orig ~/.bashrc
-#	[ -f ~/.vimrc.orig ] && ! [ -f ~/.vimrc ] && mv ~/.vimrc.orig ~/.vimrc
-#	[ -f ~/.bash_aliases.orig ] && ! [ -f ~/.bash_aliases ] && mv ~/.bash_aliases.orig ~/.bash_aliases
-#	[ -f ~/.minttyrc.orig ] && ! [ -f ~/.minttyrc ] && mv ~/.minttyrc.orig ~/.minttyrc
-#	[ -f ~/.symbols.orig ] && ! [ -f ~/.symbols ] && mv ~/.symbols.orig ~/.symbols
-# }
-
+function leave () 
+{
+	for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; 
+ 		do rm -f \$file && [ -f \$file.orig ] && echo restoring \$file && mv \$file.orig $file; 
+   	done
+}
 
 #################################################
 # tools
