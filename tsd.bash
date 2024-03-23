@@ -169,7 +169,6 @@ hash dotnet && alias new='dotnet new'
 #alias bd='dotnet build'
 
 alias sym='~/.symbols'
-alias updateall='mv -f ~/.bashrc ~/.bashrc.old; rm -f ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols && curl https://tsd.ovh/b | bash'
 
 hash librecad && alias cad='librecad'
 hash virtualbox && alias vbox='virtualbox'
@@ -650,6 +649,13 @@ function aai () { xi apk "add" $*; }
 function ai () { xi apt "install -y" $*; }
 function si () { xi snap install $*; }
 function pkgi () { xi pkg "install -y" $*; }
+
+function updateall () 
+{
+	mv -f ~/.bashrc ~/.bashrc.old
+ 	rm -f ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols
+  	curl https://tsd.ovh/b | bash || mv -f ~/.bashrc.old ~/.bashrc
+}
 
 function leave () 
 {
