@@ -216,6 +216,7 @@ unalias hash
 ! hash 2>/dev/null dotnet && [  -d ~/AppData/Local/Microsoft/dotnet ] &&PATH=$PATH:~/AppData/Local/Microsoft/dotnet
 ! hash 2>/dev/null php && [  -d ~/.php ] && PATH=$PATH:~/.php
 ! hash 2>/dev/null php7 && [  -d ~/.php7 ] && PATH=$PATH:~/.php7
+hash 2>/dev/null yarn && PATH="$(yarn global bin):$PATH"
 
 . ~/.bash_aliases
 
