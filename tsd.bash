@@ -735,7 +735,7 @@ si inkscape
 si chromium
 
 if hash dpkg && hash apt && hash curl && hash sudo; then
-	hash code || alias code='curl -L "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-`dpkg --print-architecture`" -o code.deb && sudo apt install -y ./code.deb && rm code.deb && code'
+	hash code || alias code='curl -L "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-`dpkg --print-architecture`" -o code.deb && sudo apt install -y ./code.deb && rm code.deb && unalias code && code'
 fi
 
 ai firefox
