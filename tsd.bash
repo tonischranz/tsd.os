@@ -208,6 +208,7 @@ hash git && __git_complete gp _git_push
 hash git && __git_complete merge _git_merge
 hash git && __git_complete rebase _git_rebase
 hash git && __git_complete push _git_push
+hash git && __git_complete clone _git_clone
 
 unalias hash
 " > ~/.bash_aliases
