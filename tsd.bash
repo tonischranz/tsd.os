@@ -135,7 +135,7 @@ alias cl='clear'
 
 alias sudo='sudo '
 
-hash git && alias ga='git add --patch'
+hash git && alias ga='git add'
 hash git && alias gb='git branch'
 #hash git && alias gc='git clone'
 hash git && alias gd='git diff'
@@ -197,6 +197,7 @@ hash vim && alias vi='vim'
 hash htop && alias top='htop'
 
 #alias completions
+hash git && __git_complete ga _git_add
 hash git && __git_complete go _git_checkout
 hash git && __git_complete gb _git_branch
 hash git && __git_complete gd _git_diff
