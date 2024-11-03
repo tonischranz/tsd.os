@@ -10,7 +10,7 @@
 
 set fbsd_root=http://ftp.ch.freebsd.org/pub/FreeBSD/releases
 set fbsd_arch=amd64
-set fbsd_rel="14.0"
+set fbsd_rel="14.1"
 set mode=uefi
 set pwd=`pwd`
 
