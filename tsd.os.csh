@@ -25,7 +25,7 @@ echo "${e}[34m|   ${e}[47;30mtsd.${e}[0m${e}[32m os${e}[0m                      
 echo " ${e}[34m\______________________________/${e}[0m"
 echo
 
-[ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
+[ -n "$1" ] || echo "Usage: $0 live          - boot live system\
        $0 install       - install base pkgs\
        $0 ui            - install xorg,firefox\
        $0 cc            - install clang/headers/libs\
