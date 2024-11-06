@@ -58,10 +58,13 @@ mount -t tmpfs -o size=1512M tmpfs /var/db/pkg
 mount -t tmpfs -o size=3512M tmpfs /var/cache/pkg
 mount -t tmpfs -o size=12512M tmpfs /usr/local
 mount -t tmpfs -o size=512M tmpfs /root
-cp /etc/ssl/openssl.cnf /root
-mount -t tmpfs -o size=20M tmpfs /etc/ssl
-cp /root/openssl.cnf /etc/ssl
-rm /root/openssl.cnf
+set etc_dir=`mktemp -d`
+mount -t unionfs $etc_dir /etc
+#cp /etc/ssl/openssl.cnf /root
+#mount -t tmpfs -o size=20M tmpfs /etc/ssl
+#cp /root/openssl.cnf /etc/ssl
+#rm /root/openssl.cnf
+
 pkg install -y curl
 tsd.os install
 exit
