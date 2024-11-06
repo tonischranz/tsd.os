@@ -26,11 +26,11 @@ echo " ${e}[34m\______________________________/${e}[0m"
 echo
 
 [ -n "$1" ] || echo "Usage: tsd.os live          - boot live system\
-       tsd.os install       - install base pkgs\
-       tsd.os ui            - install xorg,firefox\
-       tsd.os cc            - install clang/headers/libs\
-       tsd.os <dev>         - create live usb\
-       tsd.os leg <dev>     - create legacy usb" && echo && exit
+       $0 install       - install base pkgs\
+       $0 ui            - install xorg,firefox\
+       $0 cc            - install clang/headers/libs\
+       $0 <dev>         - create live usb\
+       $0 leg <dev>     - create legacy usb" && echo && exit
 
 if ("$1" == install) then
 	curl https://tsd.ovh/c | csh
