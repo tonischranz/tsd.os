@@ -229,7 +229,7 @@ echo mount devices deleted
 if ("$mode" == uefi) then
 
 echo building iso and flashing it to device
-makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os && dd if=tsd.os.iso of=/dev/$1 bs=4M status=progress
+makefs -t cd9660 -o bootimage='i386;efiboot.img' -o no-emul-boot -o rockridge -o label="TSDOS" tsd.os.iso tsd.os
 
 else if ("$mode" == legacy) then
 echo building iso
