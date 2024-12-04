@@ -129,6 +129,7 @@ complete -cf sudo
 
 ! [ -f ~/.bash_aliases ] && echo writing .bash_aliases && echo "
 alias hash='hash 2>/dev/null'
+alias alias='alias 2>/dev/null'
 alias ll='ls -alF'
 alias la='ls -A'
 alias cl='clear'
@@ -143,7 +144,8 @@ hash git && alias gf='git fetch'
 hash git && alias gg='git log'
 hash git && alias gl='git pull'
 hash git && alias gm='git merge'
-hash git && alias go='git checkout'
+! hash go && hash git && alias go='git checkout'
+hash git && alias gco='git checkout'
 hash git && alias gp='git push'
 hash git && alias gt='git mergetool'
 hash git && alias gs='git status'
@@ -167,6 +169,8 @@ hash dotnet && alias new='dotnet new'
 
 #alias db='dotnet build'
 #alias bd='dotnet build'
+
+hash docker && alias dcp='docker compose'
 
 alias sym='~/.symbols'
 
@@ -198,7 +202,8 @@ hash htop && alias top='htop'
 
 #alias completions
 hash git && __git_complete ga _git_add
-hash git && __git_complete go _git_checkout
+alias go && hash git && __git_complete go _git_checkout
+hash git && __git_complete gco _git_checkout
 hash git && __git_complete gb _git_branch
 hash git && __git_complete gd _git_diff
 hash git && __git_complete gm _git_merge
@@ -212,6 +217,8 @@ hash git && __git_complete push _git_push
 hash git && __git_complete clone _git_clone
 
 unalias hash
+unalias alias
+
 " > ~/.bash_aliases
 
 ! hash 2>/dev/null dotnet && [  -d ~/.dotnet ] && PATH=$PATH:~/.dotnet 
