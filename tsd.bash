@@ -130,7 +130,7 @@ complete -cf sudo
 ! [ -f ~/.bash_aliases ] && echo writing .bash_aliases && echo "
 alias hash='hash 2>/dev/null'
 alias alias='alias 2>/dev/null'
-alias ll='ls -alF'
+alias ll='ls -ahlF'
 alias la='ls -A'
 alias cl='clear'
 
