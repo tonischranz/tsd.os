@@ -184,7 +184,7 @@ alias l='lynx'
 alias c='curl'
 alias v='vim -c \"vs.|vertical resize 32|wincmd w|bel term\"'
 alias g='grep'
-alias f='find -type f -print | xargs grep --color=auto'
+alias f='find -type f -print0 | xargs -0 grep --color=auto'
 ## todo FreeBSD find
 alias n='nano'
 alias t='top'
