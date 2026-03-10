@@ -4,7 +4,7 @@ echo
 echo
 echo creating backup files
 
-for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc ~/.symbols; 
+for file in ~/.bashrc ~/.vimrc ~/.bash_aliases ~/.minttyrc; 
   do [ -f $file ] && ! [ -f $file.orig ] && echo backing up $file && mv $file $file.orig; 
 done
 
@@ -217,6 +217,7 @@ hash _git_merge && __git_complete merge _git_merge
 hash _git_rebase && __git_complete rebase _git_rebase
 hash _git_push && __git_complete push _git_push
 hash _git_clone && __git_complete clone _git_clone
+hash _git_stash && __git_complete gst _git_stash
 
 unalias hash
 unalias alias
