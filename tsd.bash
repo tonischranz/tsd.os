@@ -67,7 +67,7 @@ if [ "$color_prompt" = yes ]; then
     PS1+=$'\[\e[32m\]\h '
 #    PS1+=$'\[\e[31m\]: '
     PS1+=$'\[\e[33m\]\w'
-hash git && PS1+=$'\[\e[94m\]$(__git_ps1)'
+hash __git_ps1 && PS1+=$'\[\e[94m\]$(__git_ps1)'
     PS1+=$'\[\e[36m\] \$'
     PS1+=$'\[\e[0m\] '
 else
@@ -203,7 +203,7 @@ hash vim && alias vi='vim'
 hash htop && alias top='htop'
 
 #alias completions
-hash git && __git_complete ga _git_add
+hash _git_add && __git_complete ga _git_add
 alias go && hash _git_checkout && __git_complete go _git_checkout
 hash _git_checkout && __git_complete gco _git_checkout
 hash _git_branch && __git_complete gb _git_branch
