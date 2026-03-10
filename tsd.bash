@@ -52,38 +52,6 @@ shopt -s globstar
 
 [ -z "$USERNAME" ] && USERNAME=$USER
 
-#################################################
-# prompt
-#################################################
-
-alias hash='hash 2>/dev/null'
-color_prompt=yes
-[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}'
-    PS1+=$'\[\e[34m\]\u '
-#    PS1+=$'\[\e[93m\]@ '
-    PS1+=$'\[\e[32m\]\h '
-#    PS1+=$'\[\e[31m\]: '
-    PS1+=$'\[\e[33m\]\w'
-hash __git_ps1 && PS1+=$'\[\e[94m\]$(__git_ps1)'
-    PS1+=$'\[\e[36m\] \$'
-    PS1+=$'\[\e[0m\] '
-else
-    hash git && PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1)\$' ||  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$' 
-fi
-unalias hash
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 #################################################
 # color support
@@ -230,6 +198,40 @@ unalias alias
 hash 2>/dev/null yarn && PATH="$(yarn global bin):$PATH"
 
 . ~/.bash_aliases
+
+#################################################
+# prompt
+#################################################
+
+alias hash='hash 2>/dev/null'
+color_prompt=yes
+[ -f /usr/local/share/git-core/contrib/completion/git-prompt.sh ] && . /usr/local/share/git-core/contrib/completion/git-prompt.sh
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}'
+    PS1+=$'\[\e[34m\]\u '
+#    PS1+=$'\[\e[93m\]@ '
+    PS1+=$'\[\e[32m\]\h '
+#    PS1+=$'\[\e[31m\]: '
+    PS1+=$'\[\e[33m\]\w'
+hash __git_ps1 && PS1+=$'\[\e[94m\]$(__git_ps1)'
+    PS1+=$'\[\e[36m\] \$'
+    PS1+=$'\[\e[0m\] '
+else
+    hash git && PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1)\$' ||  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$' 
+fi
+unalias hash
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
 
 #################################################
 # config files
