@@ -93,13 +93,13 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
+ls --color=auto && alias ls='ls --color=auto'
+dir --color=auto && alias dir='dir --color=auto'
+vdir --color=auto && alias vdir='vdir --color=auto'
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+echo x | grep --color=auto && alias grep='grep --color=auto'
+echo x | fgrep --color=auto && alias fgrep='fgrep --color=auto'
+echo x | egrep --color=auto && alias egrep='egrep --color=auto'
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -149,6 +149,7 @@ hash git && alias gco='git checkout'
 hash git && alias gp='git push'
 hash git && alias gt='git mergetool'
 hash git && alias gs='git status'
+hash git && alias gst='git stash'
 
 hash git && alias rb='git rebase'
 #hash git && alias mg='git merge'
@@ -184,7 +185,7 @@ alias l='lynx'
 alias c='curl'
 alias v='vim -c \"vs.|vertical resize 32|wincmd w|bel term\"'
 alias g='grep'
-alias f='find -type f -print0 | xargs -0 grep --color=auto'
+alias f='find . -type f -print0 | xargs -0 grep --color=auto'
 ## todo FreeBSD find
 alias n='nano'
 alias t='top'
@@ -203,19 +204,19 @@ hash htop && alias top='htop'
 
 #alias completions
 hash git && __git_complete ga _git_add
-alias go && hash git && __git_complete go _git_checkout
-hash git && __git_complete gco _git_checkout
-hash git && __git_complete gb _git_branch
-hash git && __git_complete gd _git_diff
-hash git && __git_complete gm _git_merge
-hash git && __git_complete mg _git_merge
-hash git && __git_complete rb _git_rebase
-hash git && __git_complete gp _git_push
-#hash git && __git_complete branch _git_branch
-hash git && __git_complete merge _git_merge
-hash git && __git_complete rebase _git_rebase
-hash git && __git_complete push _git_push
-hash git && __git_complete clone _git_clone
+alias go && hash _git_checkout && __git_complete go _git_checkout
+hash _git_checkout && __git_complete gco _git_checkout
+hash _git_branch && __git_complete gb _git_branch
+hash _git_diff && __git_complete gd _git_diff
+hash _git_merge && __git_complete gm _git_merge
+hash _git_merge && __git_complete mg _git_merge
+hash _git_rebase && __git_complete rb _git_rebase
+hash _git_push && __git_complete gp _git_push
+#hash _git_branch && __git_complete branch _git_branch
+hash _git_merge && __git_complete merge _git_merge
+hash _git_rebase && __git_complete rebase _git_rebase
+hash _git_push && __git_complete push _git_push
+hash _git_clone && __git_complete clone _git_clone
 
 unalias hash
 unalias alias
