@@ -93,13 +93,13 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-ls --color=auto && alias ls='ls --color=auto'
-dir --color=auto && alias dir='dir --color=auto'
-vdir --color=auto && alias vdir='vdir --color=auto'
+ls --color=auto 2> /dev/null && alias ls='ls --color=auto'
+dir --color=auto 2> /dev/null && alias dir='dir --color=auto'
+vdir --color=auto 2> /dev/null && alias vdir='vdir --color=auto'
 
-echo x | grep --color=auto && alias grep='grep --color=auto'
-echo x | fgrep --color=auto && alias fgrep='fgrep --color=auto'
-echo x | egrep --color=auto && alias egrep='egrep --color=auto'
+echo x | grep --color=auto 2> /dev/null && alias grep='grep --color=auto'
+echo x | fgrep --color=auto 2> /dev/null && alias fgrep='fgrep --color=auto'
+echo x | egrep --color=auto 2> /dev/null && alias egrep='egrep --color=auto'
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
