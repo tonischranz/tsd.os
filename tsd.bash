@@ -186,7 +186,6 @@ alias c='curl'
 alias v='vim -c \"vs.|vertical resize 32|wincmd w|bel term\"'
 alias g='grep'
 alias f='find . -type f -print0 | xargs -0 grep'
-## todo FreeBSD find
 alias n='nano'
 alias t='top'
 alias j='jobs'
