@@ -805,5 +805,5 @@ echo .bashrc && [ -f ~/.bashrc.orig ] && diff ~/.bashrc.orig ~/.bashrc
 echo .vimrc && [ -f ~/.vimrc.orig ] && diff ~/.vimrc.orig ~/.vimrc
 echo .bash_aliases && [ -f ~/.bash_aliases.orig ] && diff ~/.bash_aliases.orig ~/.bash_aliases
 echo .minttyrc && [ -f ~/.minttyrc.orig ] && diff ~/.minttyrc.orig ~/.minttyrc
-[ -f ~/.symbols.orig ] && diff ~/.symbols.orig ~/.symbols
+
 "
